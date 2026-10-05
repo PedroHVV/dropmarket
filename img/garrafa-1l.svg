@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+<rect width="400" height="400" fill="#e4f0f7"/>
+<g fill="none" stroke="#16324a" stroke-width="6" stroke-linejoin="round">
+  <rect x="155" y="90" width="90" height="35" rx="8" fill="#1f6fa8" fill-opacity="0.85"/>
+  <path d="M165 125 L165 150 L150 180 L150 290 Q150 300 160 300 L240 300 Q250 300 250 290 L250 180 L235 150 L235 125 Z" fill="#2f8fd1" fill-opacity="0.35"/>
+</g>
+<text x="200" y="340" font-family="Arial" font-size="22" fill="#5c6b7a" text-anchor="middle">Garrafa 1L</text>
+</svg>

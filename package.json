@@ -1,0 +1,9 @@
+{
+  "name": "loja-online",
+  "version": "1.0.0",
+  "description": "Loja online simples com carrinho e checkout via Mercado Pago (Pix e cartão)",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev"
+  }
+}

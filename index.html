@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frost Térmicas</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="barra-promo">🧊 Garrafas térmicas que mantêm a temperatura por horas</div>
+
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo">Frost<span>Térmicas</span></a>
+      <nav class="nav-carrinho">
+        <a href="carrinho.html" class="link-carrinho">
+          🛒 Carrinho
+          <span class="contador-carrinho" data-contador-carrinho>0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-carrossel">
+      <div class="slide ativo" style="background-image: url('https://images.unsplash.com/photo-1605608800690-9e496dfdac1c?w=1600&q=75&auto=format&fit=crop');">
+        <div class="slide-conteudo">
+          <h1>Sua bebida na temperatura certa, o dia todo</h1>
+          <p>Garrafas térmicas que mantêm o gelado gelado e o quente quente, com pagamento via Pix ou cartão.</p>
+          <a href="#grade-produtos" class="botao-hero">Ver coleção</a>
+        </div>
+      </div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1601937286283-1c4550e05f58?w=1600&q=75&auto=format&fit=crop');">
+        <div class="slide-conteudo">
+          <h1>Estilo em qualquer lugar</h1>
+          <p>Do treino ao trabalho, a garrafa térmica perfeita pra sua rotina.</p>
+          <a href="#grade-produtos" class="botao-hero">Ver coleção</a>
+        </div>
+      </div>
+      <div class="pontos-carrossel">
+        <button class="ponto ativo" aria-label="Ir para o slide 1"></button>
+        <button class="ponto" aria-label="Ir para o slide 2"></button>
+      </div>
+    </section>
+
+    <section class="faixa-confianca">
+      <div class="item-confianca">
+        <span class="icone">🔒</span>
+        <div>
+          <strong>Pagamento seguro</strong>
+          <span>Processado pelo Mercado Pago</span>
+        </div>
+      </div>
+      <div class="item-confianca">
+        <span class="icone">💳</span>
+        <div>
+          <strong>Pix ou cartão</strong>
+          <span>Escolha a forma que preferir</span>
+        </div>
+      </div>
+      <div class="item-confianca">
+        <span class="icone">🚚</span>
+        <div>
+          <strong>Envio para todo o Brasil</strong>
+          <span>Acompanhe seu pedido</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Nossas garrafas e copos</h2>
+      <div id="grade-produtos" class="grade-produtos">
+        <!-- produtos inseridos via JavaScript -->
+      </div>
+    </section>
+
+    <section class="sobre-nos">
+      <h2>Sobre a Frost Térmicas</h2>
+      <p>
+        Somos uma loja brasileira apaixonada por praticidade e estilo.
+        Selecionamos garrafas e copos térmicos de qualidade pra você manter
+        sua bebida na temperatura certa onde quer que esteja, com entrega
+        para todo o Brasil e pagamento facilitado via Pix ou cartão.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="titulo-secao">Perguntas frequentes</h2>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Quais as formas de pagamento?</summary>
+          <p>Aceitamos Pix e cartão de crédito, processados com segurança pelo Mercado Pago.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Qual o prazo de entrega?</summary>
+          <p>O prazo varia de acordo com a sua região e é informado durante a finalização da compra.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Posso trocar ou devolver meu pedido?</summary>
+          <p>Sim! Você tem até 7 dias corridos após o recebimento para desistir da compra, conforme o Código de Defesa do Consumidor. Entre em contato pelo WhatsApp pra combinar a troca ou devolução.</p>
+        </details>
+        <details class="faq-item">
+          <summary>As garrafas são à prova de vazamento?</summary>
+          <p>Sim, todas as garrafas e copos da nossa coleção têm tampa vedada, ideal pra levar na bolsa ou mochila.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Como acompanho meu pedido?</summary>
+          <p>Depois que o pagamento for aprovado, entraremos em contato com as informações de rastreio.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="politica-loja">
+      <h2>Trocas, devolução e entrega</h2>
+      <p><strong>Arrependimento:</strong> conforme o Código de Defesa do Consumidor (art. 49), você pode desistir da compra em até 7 dias corridos após o recebimento, sem precisar justificar o motivo.</p>
+      <p><strong>Entrega:</strong> o prazo é calculado com base no seu endereço e mostrado antes de você finalizar a compra.</p>
+      <p><strong>Dúvidas:</strong> fale com a gente pelo botão do WhatsApp no canto da tela.</p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>&copy; <span id="ano"></span> Frost Térmicas. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/produtos.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/carrossel.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script>
+    document.getElementById("ano").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

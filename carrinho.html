@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrinho - Frost Térmicas</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="barra-promo">🧊 Garrafas térmicas que mantêm a temperatura por horas</div>
+
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo">Frost<span>Térmicas</span></a>
+      <nav class="nav-carrinho">
+        <a href="carrinho.html" class="link-carrinho">
+          🛒 Carrinho
+          <span class="contador-carrinho" data-contador-carrinho>0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 class="titulo-secao">Seu carrinho</h1>
+
+    <div id="conteudo-carrinho">
+      <!-- itens do carrinho inseridos via JavaScript -->
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>&copy; <span id="ano"></span> Frost Térmicas. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/produtos.js"></script>
+  <script src="js/carrinho.js"></script>
+  <script src="js/pagina-carrinho.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script>
+    document.getElementById("ano").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
