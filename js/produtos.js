@@ -46,3 +46,22 @@ const PRODUTOS = [
     estoque: 30
   }
 ];
+
+/**
+ * FRETE
+ * -----
+ * Valor fixo cobrado em todo pedido. Ajuste conforme o que o seu
+ * fornecedor cobra de frete (ou embuta o frete no preço do produto e
+ * deixe FRETE_FIXO = 0).
+ *   FRETE_FIXO          -> valor do frete em reais (ex: 19.90)
+ *   FRETE_GRATIS_ACIMA  -> pedidos a partir desse valor têm frete grátis
+ *                          (use 0 para desativar o frete grátis)
+ */
+const FRETE_FIXO = 19.90;
+const FRETE_GRATIS_ACIMA = 199.00;
+
+// Permite que as funções em /api usem esta mesma lista (preços confiáveis).
+// No navegador, "module" não existe e esta linha é ignorada.
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { PRODUTOS, FRETE_FIXO, FRETE_GRATIS_ACIMA };
+}

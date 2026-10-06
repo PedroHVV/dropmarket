@@ -14,14 +14,36 @@ automaticamente).
 - `js/carrinho.js`, `js/catalogo.js`, `js/pagina-carrinho.js`, `js/carrossel.js` – lógica do site
 - `css/style.css` – visual do site
 - `favicon.svg` – ícone que aparece na aba do navegador
-- `api/criar-preferencia.js` – função que gera o link de pagamento no Mercado Pago
-- `api/webhook.js` – endpoint opcional para automatizar confirmações de pagamento no futuro
+- `api/criar-preferencia.js` – função que valida o pedido, recalcula preços/frete e gera o link de pagamento no Mercado Pago
+- `api/webhook.js` – recebe o aviso do Mercado Pago e te manda um **e-mail com itens e endereço** a cada pedido pago
 
 ## Editar os produtos
 
 Abra `js/produtos.js` e edite a lista `PRODUTOS`. Para cada produto, preencha
 `id`, `nome`, `preco` (use ponto, ex: 119.90), `imagem` e `descricao`. Coloque
 as fotos reais na pasta `img/`.
+
+## Frete
+
+Abra `js/produtos.js` e ajuste no final do arquivo:
+
+- `FRETE_FIXO` – valor cobrado em todo pedido (ex: `19.90`; use `0` se embutir o frete no preço)
+- `FRETE_GRATIS_ACIMA` – pedidos a partir desse valor têm frete grátis (use `0` para desativar)
+
+O servidor recalcula preços e frete a partir desse arquivo, então o cliente
+não consegue alterar o valor da compra pelo navegador.
+
+## Receber o aviso de cada pedido por e-mail
+
+1. Crie uma conta grátis em https://resend.com e gere uma **API Key**.
+2. Na Vercel, em **Settings > Environment Variables**, adicione:
+   - `RESEND_API_KEY` = a chave do Resend
+   - `EMAIL_PEDIDOS` = o e-mail que vai receber os avisos (o **mesmo** e-mail da conta no Resend)
+3. Faça um **Redeploy** (Deployments > ... > Redeploy).
+
+Sem essas variáveis o pedido pago aparece só nos logs da Vercel.
+Não precisa configurar nada no painel do Mercado Pago: o endereço de aviso
+já é enviado junto com cada pagamento.
 
 ## Configurar o WhatsApp
 
@@ -47,8 +69,8 @@ páginas do site depois disso.
 
 ## Próximos passos (quando a loja crescer)
 
-- **Controle de estoque automático**: hoje o campo `estoque` é só informativo.
-- **Cálculo de frete**: hoje o site não calcula frete automaticamente.
-- **E-mail de confirmação automático**: pode ser adicionado no `api/webhook.js`.
+- **Controle de estoque automático**: hoje o campo `estoque` só limita a quantidade por pedido.
+- **Frete por região**: hoje o frete é fixo (veja `js/produtos.js`).
+- **E-mail de confirmação para o cliente**: o aviso atual vai só para você.
 
 Qualquer uma dessas melhorias, é só pedir.

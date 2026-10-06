@@ -550,6 +550,85 @@ a {
   min-height: 1em;
 }
 
+/* Formulário de entrega */
+.form-entrega {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.form-entrega h2 {
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.campo-largo {
+  grid-column: 1 / -1;
+}
+
+.campo label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--cor-texto-suave);
+  margin-bottom: 4px;
+}
+
+.campo input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem; /* 16px evita zoom automático no iPhone */
+  font-family: inherit;
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  background: var(--cor-branco);
+}
+
+.campo input:focus {
+  outline: 2px solid var(--cor-primaria);
+  outline-offset: 1px;
+  border-color: var(--cor-primaria);
+}
+
+.campo input.campo-invalido {
+  border-color: var(--cor-perigo);
+  outline: 2px solid var(--cor-perigo);
+  outline-offset: 1px;
+}
+
+.aviso-form {
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+  margin: 14px 0 0;
+}
+
+.linha-resumo {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 6px;
+  color: var(--cor-texto-suave);
+}
+
+.dica-frete {
+  font-size: 0.8rem;
+  color: var(--cor-primaria-escura);
+  margin: 0 0 8px;
+}
+
+@media (max-width: 520px) {
+  .grade-campos {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Páginas de status (sucesso/falha/pendente) */
 .pagina-status {
   max-width: 480px;
