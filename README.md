@@ -1,4 +1,4 @@
-# Frost Térmicas — Loja Online
+# Térmica Market — Loja Online
 
 Site de vendas com catálogo de produtos, carrinho de compras e checkout via
 **Mercado Pago** (aceita Pix, cartão de crédito, débito e boleto
