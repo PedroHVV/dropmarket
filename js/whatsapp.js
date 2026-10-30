@@ -9,7 +9,7 @@
  * aparece automaticamente em todas as páginas do site.
  */
 const NUMERO_WHATSAPP = "5500000000000"; // <-- troque pelo seu número
-const MENSAGEM_PADRAO = "Olá! Vim pelo site da Frost Térmicas e tenho uma dúvida.";
+const MENSAGEM_PADRAO = "Olá! Vim pelo site da Térmica Market e tenho uma dúvida.";
 
 function inserirBotaoWhatsapp() {
   const link = document.createElement("a");

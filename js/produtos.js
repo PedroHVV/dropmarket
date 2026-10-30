@@ -6,6 +6,8 @@
  * Cada produto precisa de:
  *   id        -> um código único (não repita entre produtos)
  *   nome      -> nome do produto
+ *   tamanho   -> tamanho/capacidade, ex: "500ml" ou "1L" (agrupa os produtos
+ *                nas páginas de tamanho; escreva igual nos produtos do mesmo tamanho)
  *   preco     -> preço em reais, usando ponto para centavos (ex: 119.90)
  *   imagem    -> caminho da imagem (coloque os arquivos na pasta /img)
  *   descricao -> texto curto explicando o produto
@@ -15,6 +17,7 @@
 const PRODUTOS = [
   {
     id: "prod-001",
+    tamanho: "1L",
     nome: "Garrafa Térmica 1L",
     preco: 119.90,
     imagem: "img/garrafa-1l.svg",
@@ -23,6 +26,7 @@ const PRODUTOS = [
   },
   {
     id: "prod-002",
+    tamanho: "890ml",
     nome: "Copo Térmico com Alça 890ml",
     preco: 99.90,
     imagem: "img/copo-alca-890ml.svg",
@@ -31,6 +35,7 @@ const PRODUTOS = [
   },
   {
     id: "prod-003",
+    tamanho: "500ml",
     nome: "Garrafa Térmica 500ml",
     preco: 79.90,
     imagem: "img/garrafa-500ml.svg",
@@ -39,6 +44,7 @@ const PRODUTOS = [
   },
   {
     id: "prod-004",
+    tamanho: "350ml",
     nome: "Garrafa Infantil 350ml",
     preco: 69.90,
     imagem: "img/garrafa-infantil-350ml.svg",
