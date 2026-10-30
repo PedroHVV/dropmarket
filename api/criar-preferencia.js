@@ -98,7 +98,7 @@ function calcularFrete(subtotal) {
 function gerarNumeroPedido() {
   const agora = Date.now().toString(36).toUpperCase();
   const aleatorio = Math.random().toString(36).slice(2, 5).toUpperCase();
-  return `FROST-${agora}${aleatorio}`;
+  return `TMARKET-${agora}${aleatorio}`;
 }
 
 module.exports = async function handler(req, res) {
@@ -196,7 +196,7 @@ module.exports = async function handler(req, res) {
             pending: `${origem}/pendente.html`
           },
           auto_return: "approved",
-          statement_descriptor: "FROST TERMICA"
+          statement_descriptor: "TERMICA MARKET"
         })
       }
     );

@@ -166,7 +166,7 @@ async function enviarEmail(pedido) {
       Authorization: `Bearer ${chave}`
     },
     body: JSON.stringify({
-      from: "Frost Térmicas <onboarding@resend.dev>",
+      from: "Térmica Market <onboarding@resend.dev>",
       to: [destino],
       subject: `Novo pedido pago ${pedido.pedido} - ${reais(pedido.total)}`,
       html: htmlDoPedido(pedido),
