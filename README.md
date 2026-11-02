@@ -25,10 +25,14 @@ as fotos reais na pasta `img/`.
 
 ## Frete
 
-Abra `js/produtos.js` e ajuste no final do arquivo:
+O frete é calculado pelo **CEP** do cliente (que define a região) e pelo
+**peso** do pedido. Abra `js/produtos.js` e ajuste:
 
-- `FRETE_FIXO` – valor cobrado em todo pedido (ex: `19.90`; use `0` se embutir o frete no preço)
-- `FRETE_GRATIS_ACIMA` – pedidos a partir desse valor têm frete grátis (use `0` para desativar)
+- `pesoEnvio` (em cada produto) – peso em gramas já embalado para envio
+- `FRETE_TABELA` – preço de cada região para cada faixa de peso (os valores
+  atuais são estimativas: confira no Melhor Envio, saindo de Goiânia)
+- `FRETE_GRATIS_ACIMA` e `FRETE_GRATIS_REGIOES` – a partir de quanto e em quais
+  regiões o frete é grátis (use `0` em `FRETE_GRATIS_ACIMA` para desativar)
 
 O servidor recalcula preços e frete a partir desse arquivo, então o cliente
 não consegue alterar o valor da compra pelo navegador.
@@ -70,7 +74,7 @@ páginas do site depois disso.
 ## Próximos passos (quando a loja crescer)
 
 - **Controle de estoque automático**: hoje o campo `estoque` só limita a quantidade por pedido.
-- **Frete por região**: hoje o frete é fixo (veja `js/produtos.js`).
+- **Cotação de frete em tempo real**: hoje o frete vem de uma tabela por região (veja `js/produtos.js`).
 - **E-mail de confirmação para o cliente**: o aviso atual vai só para você.
 
 Qualquer uma dessas melhorias, é só pedir.

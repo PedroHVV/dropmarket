@@ -7,13 +7,13 @@
  * não é preciso configurar cada meio de pagamento manualmente.
  *
  * Segurança: o navegador envia só { id, quantidade } de cada item. Os
- * preços e o frete são recalculados aqui, a partir de js/produtos.js,
+ * preços e o frete (por CEP e peso) são recalculados aqui, a partir de js/produtos.js,
  * então ninguém consegue alterar o valor da compra pelo navegador.
  *
  * Requer a variável de ambiente MP_ACCESS_TOKEN (veja o README.md).
  */
 
-const { PRODUTOS, FRETE_FIXO, FRETE_GRATIS_ACIMA } = require("../js/produtos.js");
+const { PRODUTOS, calcularFretePedido } = require("../js/produtos.js");
 
 function limpar(valor, max) {
   return String(valor == null ? "" : valor).trim().slice(0, max);
@@ -90,11 +90,6 @@ function montarItens(itensRecebidos) {
   return { itens };
 }
 
-function calcularFrete(subtotal) {
-  if (FRETE_GRATIS_ACIMA > 0 && subtotal >= FRETE_GRATIS_ACIMA) return 0;
-  return FRETE_FIXO;
-}
-
 function gerarNumeroPedido() {
   const agora = Date.now().toString(36).toUpperCase();
   const aleatorio = Math.random().toString(36).slice(2, 5).toUpperCase();
@@ -134,7 +129,17 @@ module.exports = async function handler(req, res) {
     const { cliente } = resultadoCliente;
 
     const subtotal = itens.reduce((t, i) => t + i.unit_price * i.quantity, 0);
-    const frete = calcularFrete(subtotal);
+    // O frete vem do CEP (e do peso do pedido), nunca do navegador.
+    const resultadoFrete = calcularFretePedido(
+      itens.map((i) => ({ id: i.id, quantidade: i.quantity })),
+      subtotal,
+      cliente.cep
+    );
+    if (resultadoFrete.valor === null) {
+      res.status(400).json({ erro: "Não conseguimos calcular o frete para este CEP. Confira o CEP informado." });
+      return;
+    }
+    const frete = resultadoFrete.valor;
 
     const itensMercadoPago = itens.map((i) => ({ ...i }));
     if (frete > 0) {
@@ -187,7 +192,8 @@ module.exports = async function handler(req, res) {
             bairro: cliente.bairro,
             cidade: cliente.cidade,
             uf: cliente.uf,
-            frete: frete.toFixed(2)
+            frete: frete.toFixed(2),
+            frete_regiao: resultadoFrete.regiaoNome
           },
           notification_url: `${hospedagem}/api/webhook`,
           back_urls: {

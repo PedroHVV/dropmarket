@@ -2,7 +2,7 @@
  * Renderiza o conteúdo da página do carrinho (carrinho.html),
  * o formulário de entrega e o botão de finalizar compra (checkout).
  *
- * Requer produtos.js (FRETE_FIXO, FRETE_GRATIS_ACIMA) e carrinho.js.
+ * Requer produtos.js (calcularFretePedido, FRETE_GRATIS_ACIMA...) e carrinho.js.
  */
 
 const CHAVE_DADOS_CLIENTE = "loja_dados_cliente";
@@ -48,10 +48,45 @@ function somenteDigitos(texto) {
   return String(texto || "").replace(/\D/g, "");
 }
 
-/** Calcula o frete a partir do subtotal (mesma regra usada no servidor). */
-function calcularFrete(subtotal) {
-  if (FRETE_GRATIS_ACIMA > 0 && subtotal >= FRETE_GRATIS_ACIMA) return 0;
-  return FRETE_FIXO;
+/** Frete do carrinho atual, pelo CEP digitado (mesma regra usada no servidor). */
+function freteAtual() {
+  const itens = obterCarrinho().map((i) => ({ id: i.id, quantidade: i.quantidade }));
+  return calcularFretePedido(itens, calcularTotalCarrinho(), dadosCliente.cep);
+}
+
+/** Textos do resumo (frete, dica e total) conforme o CEP já digitado. */
+function textosResumo() {
+  const subtotal = calcularTotalCarrinho();
+  const f = freteAtual();
+
+  if (f.valor === null) {
+    return {
+      frete: "Informe o CEP",
+      dica: "O frete é calculado pelo seu CEP.",
+      total: `${formatarPreco(subtotal)} <small>+ frete</small>`
+    };
+  }
+
+  const falta = FRETE_GRATIS_ACIMA - subtotal;
+  const elegivel = FRETE_GRATIS_REGIOES.includes(f.regiao);
+  let dica = `Entrega para ${f.regiaoNome}.`;
+  if (!f.gratis && FRETE_GRATIS_ACIMA > 0 && elegivel && falta > 0) {
+    dica += ` Faltam ${formatarPreco(falta)} para ganhar frete grátis.`;
+  }
+  return {
+    frete: f.gratis ? "Grátis" : formatarPreco(f.valor),
+    dica,
+    total: formatarPreco(subtotal + f.valor)
+  };
+}
+
+function atualizarResumo() {
+  const x = textosResumo();
+  const mapa = { "valor-frete": x.frete, "dica-frete": x.dica, "valor-total": x.total };
+  Object.keys(mapa).forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = mapa[id];
+  });
 }
 
 function campoHtml(id, rotulo, opcoes) {
@@ -107,8 +142,7 @@ function renderizarCarrinho() {
   }
 
   const subtotal = calcularTotalCarrinho();
-  const frete = calcularFrete(subtotal);
-  const total = subtotal + frete;
+  const resumo = textosResumo();
 
   const linhas = carrinho.map((item) => `
     <div class="item-carrinho" data-id="${esc(item.id)}">
@@ -127,20 +161,14 @@ function renderizarCarrinho() {
     </div>
   `).join("");
 
-  const textoFrete = frete === 0 ? "Grátis" : formatarPreco(frete);
-  const dicaFrete =
-    frete > 0 && FRETE_GRATIS_ACIMA > 0
-      ? `<p class="dica-frete">Faltam ${formatarPreco(FRETE_GRATIS_ACIMA - subtotal)} para ganhar frete grátis.</p>`
-      : "";
-
   container.innerHTML = `
     <div class="lista-carrinho">${linhas}</div>
     ${formularioEntregaHtml()}
     <div class="resumo-carrinho">
       <p class="linha-resumo">Subtotal: <span>${formatarPreco(subtotal)}</span></p>
-      <p class="linha-resumo">Frete: <span>${textoFrete}</span></p>
-      ${dicaFrete}
-      <p class="total-carrinho">Total: <strong>${formatarPreco(total)}</strong></p>
+      <p class="linha-resumo">Frete: <span id="valor-frete">${resumo.frete}</span></p>
+      <p class="dica-frete" id="dica-frete">${resumo.dica}</p>
+      <p class="total-carrinho">Total: <strong id="valor-total">${resumo.total}</strong></p>
       <p class="dica-pix">Pague no Pix e a confirmação é na hora.</p>
       <p class="aviso-termos">Ao continuar, você concorda com os <a href="termos.html" target="_blank" rel="noopener">Termos de uso</a>, a <a href="privacidade.html" target="_blank" rel="noopener">Política de privacidade</a> e a política de <a href="trocas.html" target="_blank" rel="noopener">trocas e devoluções</a>.</p>
       <button id="botao-checkout" class="botao botao-primario botao-checkout">
@@ -203,6 +231,7 @@ function ligarFormulario() {
       dadosCliente[nome] = valor;
       input.classList.remove("campo-invalido");
       salvarDadosCliente();
+      if (nome === "cep") atualizarResumo();
 
       if (nome === "cep" && somenteDigitos(valor).length === 8) {
         buscarCep(somenteDigitos(valor), form);
@@ -260,6 +289,8 @@ function validarDadosCliente() {
   }
   if (somenteDigitos(d.cep).length !== 8) {
     invalidos.push({ campo: "cep", msg: "Informe um CEP válido (8 números)." });
+  } else if (freteAtual().valor === null) {
+    invalidos.push({ campo: "cep", msg: "Não conseguimos calcular o frete para este CEP. Confira o número." });
   }
   if (!d.rua.trim()) invalidos.push({ campo: "rua", msg: "Informe a rua." });
   if (!d.numero.trim()) invalidos.push({ campo: "numero", msg: "Informe o número (ou S/N)." });
