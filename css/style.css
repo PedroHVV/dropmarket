@@ -857,3 +857,70 @@ a {
   font-weight: 700;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
+
+
+/* Páginas de texto (termos, privacidade, trocas) */
+.pagina-texto {
+  max-width: 760px;
+  margin: 32px auto;
+  line-height: 1.65;
+}
+
+.pagina-texto h1 {
+  margin-bottom: 4px;
+}
+
+.pagina-texto h2 {
+  font-size: 1.15rem;
+  margin: 28px 0 8px;
+}
+
+.pagina-texto ul {
+  padding-left: 20px;
+}
+
+.pagina-texto li {
+  margin-bottom: 6px;
+}
+
+.pagina-texto .atualizacao {
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+  margin-top: 0;
+}
+
+.pagina-texto mark {
+  background: #fef3c7;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.links-rodape {
+  margin: 0 0 8px;
+}
+
+.links-rodape a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.aviso-termos {
+  font-size: 0.78rem;
+  color: var(--cor-texto-suave);
+  margin: 8px 0;
+}
+
+.aviso-termos a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.link-voltar {
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.link-voltar:hover {
+  text-decoration: underline;
+}

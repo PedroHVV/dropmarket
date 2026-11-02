@@ -141,6 +141,8 @@ function renderizarCarrinho() {
       <p class="linha-resumo">Frete: <span>${textoFrete}</span></p>
       ${dicaFrete}
       <p class="total-carrinho">Total: <strong>${formatarPreco(total)}</strong></p>
+      <p class="dica-pix">Pague no Pix e a confirmação é na hora.</p>
+      <p class="aviso-termos">Ao continuar, você concorda com os <a href="termos.html" target="_blank" rel="noopener">Termos de uso</a>, a <a href="privacidade.html" target="_blank" rel="noopener">Política de privacidade</a> e a política de <a href="trocas.html" target="_blank" rel="noopener">trocas e devoluções</a>.</p>
       <button id="botao-checkout" class="botao botao-primario botao-checkout">
         Ir para o pagamento
       </button>
