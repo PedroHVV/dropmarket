@@ -786,3 +786,74 @@ a {
     min-width: 0;
   }
 }
+
+/* Preço riscado e etiqueta de desconto */
+.area-imagem {
+  position: relative;
+}
+
+.etiqueta-desconto {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--cor-perigo);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.preco-antigo {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--cor-texto-suave);
+  text-decoration: line-through;
+  line-height: 1.2;
+}
+
+/* Aviso do Pix */
+.aviso-pix {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0f7b5f;
+  margin: 0 0 10px;
+}
+
+.dica-pix {
+  font-size: 0.82rem;
+  color: #0f7b5f;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+
+/* Polimento dos cartões de produto */
+.area-imagem {
+  overflow: hidden;
+}
+
+.area-imagem .imagem-produto {
+  transition: transform 0.35s ease;
+}
+
+.cartao-produto:hover .imagem-produto {
+  transform: scale(1.04);
+}
+
+.etiqueta-estoque {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #9a3412;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}

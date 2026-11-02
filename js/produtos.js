@@ -8,7 +8,10 @@
  *   nome      -> nome do produto
  *   tamanho   -> tamanho/capacidade, ex: "500ml" ou "1L" (agrupa os produtos
  *                nas páginas de tamanho; escreva igual nos produtos do mesmo tamanho)
- *   preco     -> preço em reais, usando ponto para centavos (ex: 119.90)
+ *   preco     -> preço de venda em reais, usando ponto para centavos (ex: 119.90)
+ *   precoDe   -> (opcional) preço antigo, que aparece riscado com a etiqueta de
+ *                desconto. Só use se for um preço real que você já praticou ou
+ *                que dá para comprovar. Apague a linha para mostrar só o preço.
  *   imagem    -> caminho da imagem (coloque os arquivos na pasta /img)
  *   descricao -> texto curto explicando o produto
  *   estoque   -> quantidade disponível (opcional, deixe 999 se não for controlar)
@@ -17,39 +20,43 @@
 const PRODUTOS = [
   {
     id: "prod-001",
-    tamanho: "1L",
-    nome: "Garrafa Térmica 1L",
-    preco: 119.90,
-    imagem: "img/garrafa-1l.svg",
-    descricao: "Mantém a temperatura por horas. Aço inox, à prova de vazamento.",
-    estoque: 30
+    tamanho: "500ml",
+    nome: "Garrafa Térmica de Café 500ml – Verde",
+    precoDe: 109.90,
+    preco: 79.90,
+    imagem: "img/garrafa-cafe-500ml-verde.jpg",
+    descricao: "Garrafa térmica de café com 500ml, na cor verde. Mede 22 cm de altura e pesa 250 g.",
+    estoque: 5
   },
   {
     id: "prod-002",
-    tamanho: "890ml",
-    nome: "Copo Térmico com Alça 890ml",
-    preco: 99.90,
-    imagem: "img/copo-alca-890ml.svg",
-    descricao: "Com alça e canudo, ideal pra levar pra qualquer lugar.",
-    estoque: 30
+    tamanho: "1,2L",
+    nome: "Garrafa Térmica com Alça 1,2L – Lilás",
+    precoDe: 179.90,
+    preco: 129.90,
+    imagem: "img/garrafa-alca-1200ml-lilas.jpg",
+    descricao: "Garrafa térmica de 1,2L na cor lilás, com alça para carregar. Mede 26 cm de altura e pesa 550 g.",
+    estoque: 5
   },
   {
     id: "prod-003",
-    tamanho: "500ml",
-    nome: "Garrafa Térmica 500ml",
+    tamanho: "400ml",
+    nome: "Copo Porta Long Neck 400ml (2 tampas) – Rosa",
+    precoDe: 99.90,
     preco: 79.90,
-    imagem: "img/garrafa-500ml.svg",
-    descricao: "Tamanho compacto, perfeita pra bolsa ou mochila do dia a dia.",
-    estoque: 30
+    imagem: "img/copo-long-neck-400ml-rosa.jpg",
+    descricao: "Copo térmico de 400ml na cor rosa, com dois tipos de tampa. Mede 14 cm de altura e pesa 200 g.",
+    estoque: 5
   },
   {
-    id: "prod-004",
-    tamanho: "350ml",
-    nome: "Garrafa Infantil 350ml",
-    preco: 69.90,
-    imagem: "img/garrafa-infantil-350ml.svg",
-    descricao: "Leve, com mosquetão, pensada pras crianças.",
-    estoque: 30
+    id: "prod-005",
+    tamanho: "750ml",
+    nome: "Garrafa Térmica Inox 750ml – Branca",
+    precoDe: 129.90,
+    preco: 99.90,
+    imagem: "img/garrafa-inox-750ml-branca.jpg",
+    descricao: "Garrafa térmica de inox com 750ml, na cor branca. Mede 26 cm de altura e pesa 300 g.",
+    estoque: 5
   }
 ];
 

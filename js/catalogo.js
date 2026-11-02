@@ -38,14 +38,36 @@ function linkTamanho(tamanho) {
   return `tamanho.html?tamanho=${encodeURIComponent(tamanho)}`;
 }
 
+/** Desconto em % entre o preço antigo (precoDe) e o preço de venda, ou 0. */
+function descontoDoProduto(produto) {
+  if (!produto.precoDe || produto.precoDe <= produto.preco) return 0;
+  return Math.round((1 - produto.preco / produto.precoDe) * 100);
+}
+
 function cartaoProdutoHtml(produto) {
+  const desconto = descontoDoProduto(produto);
+  const etiqueta = desconto > 0
+    ? `<span class="etiqueta-desconto">-${desconto}%</span>`
+    : "";
+  const poucas = typeof produto.estoque === "number" && produto.estoque > 0 && produto.estoque <= 5
+    ? `<span class="etiqueta-estoque">Poucas unidades</span>`
+    : "";
+  const precoAntigo = desconto > 0
+    ? `<span class="preco-antigo">${formatarPreco(produto.precoDe)}</span>`
+    : "";
+
   return `
     <article class="cartao-produto">
-      <img src="${esc(produto.imagem)}" alt="${esc(produto.nome)}" class="imagem-produto" loading="lazy" />
+      <div class="area-imagem">
+        ${etiqueta}
+        ${poucas}
+        <img src="${esc(produto.imagem)}" alt="${esc(produto.nome)}" class="imagem-produto" loading="lazy" />
+      </div>
       <div class="info-produto">
         <h3>${esc(produto.nome)}</h3>
         <p class="descricao-produto">${esc(produto.descricao)}</p>
-        <p class="preco-produto">${formatarPreco(produto.preco)}</p>
+        <p class="preco-produto">${precoAntigo}${formatarPreco(produto.preco)}</p>
+        <p class="aviso-pix">Pix: aprovação na hora</p>
         <button class="botao botao-primario" data-adicionar="${esc(produto.id)}">
           Adicionar ao carrinho
         </button>
