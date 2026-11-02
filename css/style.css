@@ -965,3 +965,70 @@ a {
 .info-produto {
   padding-top: 12px;
 }
+
+
+/* Sobre nós, FAQ, identificação da empresa e avaliações */
+.destaque-texto {
+  font-size: 1.1rem;
+  color: var(--cor-texto);
+}
+
+.pagina-texto .faq {
+  margin-top: 16px;
+}
+
+.dados-empresa {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  color: var(--cor-texto-suave);
+}
+
+.dados-empresa-pagina {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.link-faq-completo {
+  margin-top: 12px;
+}
+
+.lista-avaliacoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.avaliacao {
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.avaliacao-foto {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.avaliacao-texto {
+  padding: 14px 16px;
+}
+
+.avaliacao-texto p {
+  margin: 0 0 8px;
+}
+
+.avaliacao-estrelas {
+  color: #f59e0b;
+  letter-spacing: 2px;
+}
+
+.avaliacao-autor {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}

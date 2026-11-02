@@ -24,6 +24,7 @@
 
       <h2>1. Quem é o controlador dos dados</h2>
       <p>A Térmica Market, loja responsável por este site. Contato para assuntos de privacidade: <a href="mailto:termicasmarket@gmail.com">termicasmarket@gmail.com</a>.</p>
+      <p data-dados-empresa hidden></p>
 
       <h2>2. Quais dados coletamos</h2>
       <p>Coletamos apenas o necessário para vender e entregar seu pedido: nome, e-mail, telefone, CEP e endereço de entrega (rua, número, complemento, bairro, cidade e estado), além dos itens comprados e do valor do pedido.</p>
@@ -66,11 +67,13 @@
 
   <footer class="rodape">
     <div class="container">
-      <p class="links-rodape"><a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="links-rodape"><a href="sobre.html">Sobre nós</a> · <a href="faq.html">Perguntas frequentes</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="dados-empresa" data-dados-empresa hidden></p>
       <p>&copy; <span id="ano"></span> Térmica Market. Todos os direitos reservados.</p>
     </div>
   </footer>
 
+  <script src="js/empresa.js"></script>
   <script>
     document.getElementById("ano").textContent = new Date().getFullYear();
   </script>

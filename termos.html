@@ -24,6 +24,7 @@
 
       <h2>1. Quem somos</h2>
       <p>Este site é a loja Térmica Market, de garrafas e copos térmicos, com atendimento em Goiânia, GO. Contato: <a href="mailto:termicasmarket@gmail.com">termicasmarket@gmail.com</a> e WhatsApp pelo botão disponível no site.</p>
+      <p data-dados-empresa hidden></p>
 
       <h2>2. Produtos e preços</h2>
       <p>Vendemos garrafas e copos térmicos. As fotos mostram os produtos reais da loja, e as cores e medidas informadas na descrição são as que você recebe. Pequenas variações de tom podem acontecer por causa da tela do seu aparelho.</p>
@@ -62,11 +63,13 @@
 
   <footer class="rodape">
     <div class="container">
-      <p class="links-rodape"><a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="links-rodape"><a href="sobre.html">Sobre nós</a> · <a href="faq.html">Perguntas frequentes</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="dados-empresa" data-dados-empresa hidden></p>
       <p>&copy; <span id="ano"></span> Térmica Market. Todos os direitos reservados.</p>
     </div>
   </footer>
 
+  <script src="js/empresa.js"></script>
   <script>
     document.getElementById("ano").textContent = new Date().getFullYear();
   </script>

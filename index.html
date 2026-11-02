@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="barra-promo">🧊 Garrafas térmicas que mantêm a temperatura por horas</div>
+  <div class="barra-promo">🧊 Garrafas e copos térmicos · Frete grátis acima de R$ 199 · Pix com aprovação na hora</div>
 
   <header class="cabecalho">
     <div class="container cabecalho-conteudo">
@@ -82,6 +82,11 @@
       </div>
     </section>
 
+    <section id="secao-avaliacoes" hidden>
+      <h2 class="titulo-secao">O que os clientes dizem</h2>
+      <div id="lista-avaliacoes" class="lista-avaliacoes"></div>
+    </section>
+
     <section class="sobre-nos">
       <h2>Sobre a Térmica Market</h2>
       <p>
@@ -89,6 +94,7 @@
         Selecionamos garrafas e copos térmicos de qualidade pra você manter
         sua bebida na temperatura certa onde quer que esteja, com entrega
         para todo o Brasil e pagamento facilitado via Pix ou cartão.
+        <a href="sobre.html">Conheça a loja</a>.
       </p>
     </section>
 
@@ -101,34 +107,36 @@
         </details>
         <details class="faq-item">
           <summary>Qual o prazo de entrega?</summary>
-          <p>O prazo varia de acordo com a sua região e é informado durante a finalização da compra.</p>
+          <p>Despachamos em até 3 dias úteis depois da confirmação do pagamento. Depois disso, o prazo depende da sua região e da transportadora ou dos Correios.</p>
         </details>
         <details class="faq-item">
           <summary>Posso trocar ou devolver meu pedido?</summary>
           <p>Sim! Você tem até 7 dias corridos após o recebimento para desistir da compra, conforme o Código de Defesa do Consumidor. Entre em contato pelo WhatsApp pra combinar a troca ou devolução.</p>
         </details>
         <details class="faq-item">
-          <summary>As garrafas são à prova de vazamento?</summary>
-          <p>Sim, todas as garrafas e copos da nossa coleção têm tampa vedada, ideal pra levar na bolsa ou mochila.</p>
+          <summary>A garrafa pode ir na bolsa sem vazar?</summary>
+          <p>Depende do modelo, porque cada um tem um tipo de tampa. Em caso de dúvida, pergunte pelo WhatsApp antes de comprar e, por precaução, transporte sempre na vertical.</p>
         </details>
         <details class="faq-item">
           <summary>Como acompanho meu pedido?</summary>
-          <p>Depois que o pagamento for aprovado, entraremos em contato com as informações de rastreio.</p>
+          <p>Quando o pedido for despachado, você recebe as informações de rastreio pelo contato que informou na compra.</p>
         </details>
       </div>
+      <p class="link-faq-completo"><a href="faq.html">Ver todas as perguntas frequentes →</a></p>
     </section>
 
     <section class="politica-loja">
       <h2>Trocas, devolução e entrega</h2>
       <p><strong>Arrependimento:</strong> conforme o Código de Defesa do Consumidor (art. 49), você pode desistir da compra em até 7 dias corridos após o recebimento, sem precisar justificar o motivo.</p>
-      <p><strong>Entrega:</strong> o prazo é calculado com base no seu endereço e mostrado antes de você finalizar a compra.</p>
+      <p><strong>Entrega:</strong> frete de R$ 19,90 por pedido, grátis a partir de R$ 199,00. Despachamos em até 3 dias úteis depois da confirmação do pagamento.</p>
       <p><strong>Dúvidas:</strong> fale com a gente pelo botão do WhatsApp no canto da tela.</p>
     </section>
   </main>
 
   <footer class="rodape">
     <div class="container">
-      <p class="links-rodape"><a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="links-rodape"><a href="sobre.html">Sobre nós</a> · <a href="faq.html">Perguntas frequentes</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="dados-empresa" data-dados-empresa hidden></p>
       <p>&copy; <span id="ano"></span> Térmica Market. Todos os direitos reservados.</p>
     </div>
   </footer>
@@ -137,6 +145,8 @@
   <script src="js/carrinho.js"></script>
   <script src="js/catalogo.js"></script>
   <script src="js/carrossel.js"></script>
+  <script src="js/empresa.js"></script>
+  <script src="js/avaliacoes.js"></script>
   <script src="js/whatsapp.js"></script>
   <script>
     document.getElementById("ano").textContent = new Date().getFullYear();

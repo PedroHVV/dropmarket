@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre nós - Térmica Market</title>
+  <meta name="description" content="Conheça a Térmica Market, loja de garrafas e copos térmicos de Goiânia, GO, com envio para todo o Brasil." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="cabecalho">
+    <div class="container cabecalho-conteudo">
+      <a href="index.html" class="logo">Térmica<span>Market</span></a>
+      <a href="index.html" class="link-voltar">← Voltar para a loja</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="pagina-texto">
+      <h1>Sobre nós</h1>
+
+      <p class="destaque-texto">Somos a Térmica Market, uma loja de garrafas e copos térmicos com atendimento em Goiânia, GO e envio para todo o Brasil.</p>
+
+      <h2>O que a gente vende</h2>
+      <p>Garrafas e copos térmicos para o dia a dia: trabalho, estudo, treino, viagem e passeio. Escolhemos modelos práticos, em cores bonitas, e cada produto do site aparece nas fotos reais que a gente mesmo tira, para você ver o produto como ele é.</p>
+
+      <h2>Como trabalhamos</h2>
+      <ul>
+        <li><strong>Preço claro:</strong> o valor que você vê é o que você paga, mais o frete mostrado no carrinho antes do pagamento.</li>
+        <li><strong>Pagamento seguro:</strong> Pix e cartão pelo Mercado Pago. A gente não recebe nem guarda os dados do seu cartão.</li>
+        <li><strong>Estoque pequeno e real:</strong> trabalhamos com poucas unidades de cada cor, e quando acaba, acaba.</li>
+        <li><strong>Envio com acompanhamento:</strong> depois do despacho, você recebe as informações de rastreio.</li>
+        <li><strong>Direito de desistir:</strong> 7 dias depois de receber, conforme o Código de Defesa do Consumidor. Veja <a href="trocas.html">Trocas e devoluções</a>.</li>
+      </ul>
+
+      <h2>Fale com a gente</h2>
+      <p>Qualquer dúvida sobre produto, pedido ou entrega, escreva para <a href="mailto:termicasmarket@gmail.com">termicasmarket@gmail.com</a> ou use o botão do WhatsApp no canto da tela. Respondemos o mais rápido possível.</p>
+
+      <div class="dados-empresa dados-empresa-pagina" data-dados-empresa hidden></div>
+
+    </article>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p class="links-rodape"><a href="sobre.html">Sobre nós</a> · <a href="faq.html">Perguntas frequentes</a> · <a href="termos.html">Termos de uso</a> · <a href="privacidade.html">Política de privacidade</a> · <a href="trocas.html">Trocas e devoluções</a></p>
+      <p class="dados-empresa" data-dados-empresa hidden></p>
+      <p>&copy; <span id="ano"></span> Térmica Market. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/empresa.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script>
+    document.getElementById("ano").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
