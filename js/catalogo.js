@@ -111,6 +111,40 @@ function renderizarGrade(lista) {
   });
 }
 
+/**
+ * Banner da página inicial: um slide para cada produto que tenha o campo
+ * "banner" em produtos.js, com nome, preço e botão para a página do tamanho.
+ */
+function renderizarBanner() {
+  const carrossel = document.querySelector(".hero-carrossel");
+  if (!carrossel) return;
+  const lista = PRODUTOS.filter((p) => p.banner);
+  if (lista.length === 0) return;
+
+  const slides = lista.map((p, i) => {
+    const desconto = descontoDoProduto(p);
+    const antigo = desconto > 0 ? `<span class="slide-preco-antigo">${formatarPreco(p.precoDe)}</span>` : "";
+    return `
+      <div class="slide slide-produtos ${i === 0 ? "ativo" : ""}">
+        <div class="slide-conteudo">
+          <h1>${esc(p.nome)}</h1>
+          <p>${esc(p.descricao)}</p>
+          <p class="slide-preco">${antigo}<strong>${formatarPreco(p.preco)}</strong></p>
+          <a href="${linkTamanho(p.tamanho)}" class="botao-hero">Ver ${esc(p.tamanho)}</a>
+        </div>
+        <div class="slide-fotos foto-unica">
+          <img src="${esc(p.banner)}" alt="${esc(p.nome)}" ${i === 0 ? "" : 'loading="lazy"'} />
+        </div>
+      </div>`;
+  }).join("");
+
+  const pontos = lista.map((p, i) =>
+    `<button class="ponto ${i === 0 ? "ativo" : ""}" aria-label="Ir para ${esc(p.nome)}"></button>`
+  ).join("");
+
+  carrossel.innerHTML = slides + `<div class="pontos-carrossel">${pontos}</div>`;
+}
+
 /** Cartões "Compre por tamanho" da página inicial. */
 function renderizarTamanhosHome() {
   const area = document.getElementById("grade-tamanhos");
@@ -173,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("titulo-tamanho")) {
     renderizarPaginaTamanho();
   } else {
+    renderizarBanner();
     renderizarTamanhosHome();
     renderizarGrade(PRODUTOS);
   }

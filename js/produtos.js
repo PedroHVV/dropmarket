@@ -13,6 +13,8 @@
  *                desconto. Só use se for um preço real que você já praticou ou
  *                que dá para comprovar. Apague a linha para mostrar só o preço.
  *   imagem    -> caminho da imagem principal (coloque os arquivos na pasta /img)
+ *   banner    -> (opcional) foto do produto no banner da página inicial. Cada produto
+ *                com este campo ganha o seu próprio banner, com nome, preço e botão.
  *   imagens   -> (opcional) lista com todas as fotos do produto, a primeira é a
  *                principal. Quando tem mais de uma, aparecem miniaturas no cartão.
  *   descricao -> texto curto explicando o produto
@@ -27,6 +29,7 @@ const PRODUTOS = [
     precoDe: 109.90,
     preco: 79.90,
     imagem: "img/garrafa-cafe-500ml-verde.jpg",
+    banner: "img/banner-verde.jpg",
     imagens: ["img/garrafa-cafe-500ml-verde.jpg", "img/garrafa-cafe-500ml-verde-2.jpg", "img/garrafa-cafe-500ml-verde-3.jpg"],
     descricao: "Garrafa térmica de café com 500ml, na cor verde. Mede 22 cm de altura e pesa 250 g.",
     estoque: 5
@@ -38,6 +41,7 @@ const PRODUTOS = [
     precoDe: 179.90,
     preco: 129.90,
     imagem: "img/garrafa-alca-1200ml-lilas.jpg",
+    banner: "img/banner-lilas.jpg",
     imagens: ["img/garrafa-alca-1200ml-lilas.jpg", "img/garrafa-alca-1200ml-lilas-2.jpg", "img/garrafa-alca-1200ml-lilas-3.jpg"],
     descricao: "Garrafa térmica de 1,2L na cor lilás, com alça para carregar. Mede 26 cm de altura e pesa 550 g.",
     estoque: 5
@@ -49,6 +53,7 @@ const PRODUTOS = [
     precoDe: 99.90,
     preco: 79.90,
     imagem: "img/copo-long-neck-400ml-rosa.jpg",
+    banner: "img/banner-rosa.jpg",
     imagens: ["img/copo-long-neck-400ml-rosa.jpg", "img/copo-long-neck-400ml-rosa-2.jpg"],
     descricao: "Copo térmico de 400ml na cor rosa, com dois tipos de tampa. Mede 14 cm de altura e pesa 200 g.",
     estoque: 5
@@ -60,6 +65,7 @@ const PRODUTOS = [
     precoDe: 129.90,
     preco: 99.90,
     imagem: "img/garrafa-inox-750ml-branca.jpg",
+    banner: "img/banner-inox.jpg",
     descricao: "Garrafa térmica de inox com 750ml, na cor branca. Mede 26 cm de altura e pesa 300 g.",
     estoque: 5
   }

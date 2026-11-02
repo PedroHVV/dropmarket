@@ -1032,3 +1032,145 @@ a {
   font-size: 0.85rem;
   color: var(--cor-texto-suave);
 }
+
+
+/* Banner com as fotos dos nossos produtos */
+.slide-produtos {
+  background: linear-gradient(120deg, #0b2540 0%, #14507f 100%);
+}
+
+.slide-produtos::before {
+  display: none;
+}
+
+.slide-fotos {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  padding: 0 40px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.slide-fotos.fotos-4 {
+  grid-template-columns: repeat(2, 180px);
+}
+
+.slide-fotos.fotos-3 {
+  grid-template-columns: repeat(3, 170px);
+}
+
+.slide-fotos img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 640px) {
+  .slide-produtos {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .slide-fotos {
+    order: -1;
+    margin: 0;
+    padding: 18px 24px 0;
+    gap: 8px;
+  }
+
+  .slide-fotos.fotos-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .slide-fotos.fotos-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .slide-fotos img {
+    border-radius: 10px;
+    border-width: 1px;
+  }
+
+  .slide-produtos .slide-conteudo {
+    padding: 14px 24px 46px;
+  }
+}
+
+
+/* Banner com um produto por slide */
+.slide-fotos.foto-unica {
+  display: block;
+  width: 360px;
+  padding: 0 48px 0 0;
+  box-sizing: content-box;
+}
+
+.slide-fotos.foto-unica img {
+  border-radius: 18px;
+}
+
+.slide-preco {
+  margin: 0 0 18px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.slide-preco strong {
+  font-size: 1.7rem;
+}
+
+.slide-preco-antigo {
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+@media (max-width: 640px) {
+  .slide-fotos.foto-unica {
+    width: auto;
+    padding: 16px 24px 0;
+    box-sizing: border-box;
+  }
+
+  .slide-fotos.foto-unica img {
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  .slide-produtos .slide-conteudo h1 {
+    font-size: 1.25rem;
+  }
+
+  .slide-produtos .slide-conteudo p {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .slide-preco {
+    margin-bottom: 12px;
+  }
+
+  .slide-preco strong {
+    font-size: 1.35rem;
+  }
+}
+
+
+@media (max-width: 640px) {
+  .hero-carrossel {
+    height: 480px;
+  }
+
+  .slide-fotos.foto-unica img {
+    width: 130px;
+  }
+
+  .slide-produtos .slide-conteudo {
+    padding-bottom: 54px;
+  }
+}
