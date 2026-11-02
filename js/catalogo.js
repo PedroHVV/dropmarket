@@ -24,14 +24,15 @@ function tamanhoEmMl(tamanho) {
 
 /** Lista de tamanhos existentes: [{ tamanho: "500ml", quantidade: 2 }, ...] */
 function listarTamanhos() {
-  const contagem = {};
+  const modelos = {};
   PRODUTOS.forEach((p) => {
     if (!p.tamanho) return;
-    contagem[p.tamanho] = (contagem[p.tamanho] || 0) + 1;
+    if (!modelos[p.tamanho]) modelos[p.tamanho] = new Set();
+    modelos[p.tamanho].add(p.grupo || p.id);
   });
-  return Object.keys(contagem)
+  return Object.keys(modelos)
     .sort((a, b) => tamanhoEmMl(a) - tamanhoEmMl(b))
-    .map((tamanho) => ({ tamanho, quantidade: contagem[tamanho] }));
+    .map((tamanho) => ({ tamanho, quantidade: modelos[tamanho].size }));
 }
 
 function linkTamanho(tamanho) {
@@ -55,11 +56,39 @@ function miniaturasHtml(produto) {
     </button>`).join("") + `</div>`;
 }
 
-function cartaoProdutoHtml(produto) {
+/** Junta num só grupo os produtos que são o mesmo modelo em cores diferentes. */
+function agruparProdutos(lista) {
+  const mapa = new Map();
+  lista.forEach((p) => {
+    const chave = p.grupo || p.id;
+    if (!mapa.has(chave)) mapa.set(chave, []);
+    mapa.get(chave).push(p);
+  });
+  return [...mapa.values()];
+}
+
+/** Bolinhas de cor (só aparecem quando o modelo tem mais de uma cor). */
+function coresHtml(produto, variantes) {
+  if (variantes.length < 2) return "";
+  return `
+    <div class="seletor-cores">
+      <span class="cor-nome">Cor: <strong>${esc(produto.cor || "")}</strong></span>
+      <div class="cores">` + variantes.map((v) => {
+        const esgotada = typeof v.estoque === "number" && v.estoque <= 0;
+        return `<button type="button" class="cor-bolinha ${v.id === produto.id ? "ativa" : ""} ${esgotada ? "esgotada" : ""}"
+                  style="--cor: ${esc(v.corHex || "#ccc")}" data-variante="${esc(v.id)}"
+                  title="${esc(v.cor || "")}${esgotada ? " (esgotada)" : ""}"
+                  aria-label="Cor ${esc(v.cor || "")}${esgotada ? ", esgotada" : ""}" ${esgotada ? "disabled" : ""}></button>`;
+      }).join("") + `</div>
+    </div>`;
+}
+
+function cartaoProdutoHtml(produto, variantes = [produto]) {
   const desconto = descontoDoProduto(produto);
   const etiqueta = desconto > 0
     ? `<span class="etiqueta-desconto">-${desconto}%</span>`
     : "";
+  const esgotado = typeof produto.estoque === "number" && produto.estoque <= 0;
   const poucas = typeof produto.estoque === "number" && produto.estoque > 0 && produto.estoque <= 5
     ? `<span class="etiqueta-estoque">Poucas unidades</span>`
     : "";
@@ -76,39 +105,62 @@ function cartaoProdutoHtml(produto) {
       </div>
       ${miniaturasHtml(produto)}
       <div class="info-produto">
+        ${coresHtml(produto, variantes)}
         <h3>${esc(produto.nome)}</h3>
         <p class="descricao-produto">${esc(produto.descricao)}</p>
         <p class="preco-produto">${precoAntigo}${formatarPreco(produto.preco)}</p>
         <p class="aviso-pix">Pix: aprovação na hora</p>
-        <button class="botao botao-primario" data-adicionar="${esc(produto.id)}">
-          Adicionar ao carrinho
+        <button class="botao botao-primario" data-adicionar="${esc(produto.id)}" ${esgotado ? "disabled" : ""}>
+          ${esgotado ? "Esgotado" : "Adicionar ao carrinho"}
         </button>
       </div>
     </article>
   `;
 }
 
-function renderizarGrade(lista) {
-  const grade = document.getElementById("grade-produtos");
-  if (!grade) return;
-
-  grade.innerHTML = lista.map(cartaoProdutoHtml).join("");
-
-  grade.querySelectorAll(".miniatura").forEach((mini) => {
+/** Liga os cliques de um cartão: miniaturas, bolinhas de cor e botão de comprar. */
+function vincularCartao(cartao, variantes) {
+  cartao.querySelectorAll(".miniatura").forEach((mini) => {
     mini.addEventListener("click", () => {
-      const cartao = mini.closest(".cartao-produto");
       cartao.querySelector(".imagem-produto").src = mini.dataset.foto;
       cartao.querySelectorAll(".miniatura").forEach((m) => m.classList.toggle("ativa", m === mini));
     });
   });
 
-  grade.querySelectorAll("[data-adicionar]").forEach((botao) => {
+  cartao.querySelectorAll(".cor-bolinha").forEach((bolinha) => {
+    bolinha.addEventListener("click", () => {
+      const nova = variantes.find((v) => v.id === bolinha.dataset.variante);
+      if (!nova) return;
+      const molde = document.createElement("div");
+      molde.innerHTML = cartaoProdutoHtml(nova, variantes).trim();
+      const novoCartao = molde.firstElementChild;
+      cartao.replaceWith(novoCartao);
+      vincularCartao(novoCartao, variantes);
+    });
+  });
+
+  const botao = cartao.querySelector("[data-adicionar]");
+  if (botao) {
     botao.addEventListener("click", () => {
       adicionarAoCarrinho(botao.dataset.adicionar, 1);
       botao.textContent = "Adicionado! ✓";
       setTimeout(() => (botao.textContent = "Adicionar ao carrinho"), 1200);
     });
-  });
+  }
+}
+
+function renderizarGrade(lista) {
+  const grade = document.getElementById("grade-produtos");
+  if (!grade) return;
+
+  const grupos = agruparProdutos(lista).map((variantes) => ({
+    variantes,
+    // abre na primeira cor que ainda tem estoque
+    inicial: variantes.find((v) => !(typeof v.estoque === "number" && v.estoque <= 0)) || variantes[0]
+  }));
+
+  grade.innerHTML = grupos.map((g) => cartaoProdutoHtml(g.inicial, g.variantes)).join("");
+  grade.querySelectorAll(".cartao-produto").forEach((cartao, i) => vincularCartao(cartao, grupos[i].variantes));
 }
 
 /**
