@@ -44,6 +44,17 @@ function descontoDoProduto(produto) {
   return Math.round((1 - produto.preco / produto.precoDe) * 100);
 }
 
+/** Miniaturas clicáveis (só aparecem se o produto tiver mais de uma foto). */
+function miniaturasHtml(produto) {
+  const fotos = Array.isArray(produto.imagens) ? produto.imagens : [];
+  if (fotos.length < 2) return "";
+  return `<div class="miniaturas">` + fotos.map((foto, i) => `
+    <button type="button" class="miniatura ${i === 0 ? "ativa" : ""}" data-foto="${esc(foto)}"
+            aria-label="Ver foto ${i + 1} de ${fotos.length}">
+      <img src="${esc(foto)}" alt="" loading="lazy" />
+    </button>`).join("") + `</div>`;
+}
+
 function cartaoProdutoHtml(produto) {
   const desconto = descontoDoProduto(produto);
   const etiqueta = desconto > 0
@@ -63,6 +74,7 @@ function cartaoProdutoHtml(produto) {
         ${poucas}
         <img src="${esc(produto.imagem)}" alt="${esc(produto.nome)}" class="imagem-produto" loading="lazy" />
       </div>
+      ${miniaturasHtml(produto)}
       <div class="info-produto">
         <h3>${esc(produto.nome)}</h3>
         <p class="descricao-produto">${esc(produto.descricao)}</p>
@@ -81,6 +93,14 @@ function renderizarGrade(lista) {
   if (!grade) return;
 
   grade.innerHTML = lista.map(cartaoProdutoHtml).join("");
+
+  grade.querySelectorAll(".miniatura").forEach((mini) => {
+    mini.addEventListener("click", () => {
+      const cartao = mini.closest(".cartao-produto");
+      cartao.querySelector(".imagem-produto").src = mini.dataset.foto;
+      cartao.querySelectorAll(".miniatura").forEach((m) => m.classList.toggle("ativa", m === mini));
+    });
+  });
 
   grade.querySelectorAll("[data-adicionar]").forEach((botao) => {
     botao.addEventListener("click", () => {
