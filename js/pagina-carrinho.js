@@ -324,6 +324,20 @@ async function iniciarCheckout() {
     return;
   }
 
+  const freteCheckout = freteAtual();
+  const valorPedido = Number((calcularTotalCarrinho() + (freteCheckout.valor || 0)).toFixed(2));
+  const idsPedido = carrinho.map((i) => i.id);
+  const qtdPedido = carrinho.reduce((t, i) => t + i.quantidade, 0);
+  if (typeof rastrearMeta === "function") {
+    rastrearMeta("InitiateCheckout", {
+      content_ids: idsPedido,
+      content_type: "product",
+      num_items: qtdPedido,
+      value: valorPedido,
+      currency: "BRL"
+    });
+  }
+
   botao.disabled = true;
   botao.textContent = "Processando...";
   mensagem.textContent = "";
@@ -356,6 +370,13 @@ async function iniciarCheckout() {
     }
 
     const dados = await resposta.json();
+
+    // Guarda o pedido para registrar a compra no pixel quando o pagamento for aprovado
+    try {
+      localStorage.setItem("loja_ultimo_pedido", JSON.stringify({
+        pedido: dados.pedido, valor: valorPedido, ids: idsPedido, itens: qtdPedido, rastreado: false
+      }));
+    } catch (e) { /* sem localStorage: segue normal */ }
 
     if (dados.init_point) {
       // Redireciona o cliente para a página de pagamento do Mercado Pago

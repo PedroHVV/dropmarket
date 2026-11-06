@@ -37,6 +37,16 @@ function adicionarAoCarrinho(idProduto, quantidade = 1) {
   }
 
   salvarCarrinho(carrinho);
+
+  if (typeof rastrearMeta === "function") {
+    rastrearMeta("AddToCart", {
+      content_ids: [produto.id],
+      content_name: produto.nome,
+      content_type: "product",
+      value: Number((produto.preco * quantidade).toFixed(2)),
+      currency: "BRL"
+    });
+  }
 }
 
 function removerDoCarrinho(idProduto) {

@@ -6,6 +6,7 @@
   <title>Pagamento aprovado - Térmica Market</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/pixel.js"></script>
 </head>
 <body>
   <header class="cabecalho">
@@ -26,6 +27,28 @@
   <script src="js/carrinho.js"></script>
   <script src="js/whatsapp.js"></script>
   <script>
+    // Registra a compra no pixel da Meta (uma única vez por pedido)
+    (function () {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const referencia = params.get("external_reference");
+        const status = params.get("collection_status") || params.get("status");
+        const ultimo = JSON.parse(localStorage.getItem("loja_ultimo_pedido") || "null");
+        if (!ultimo || ultimo.rastreado) return;
+        if (referencia && referencia !== ultimo.pedido) return;
+        if (status && status !== "approved") return;
+        rastrearMeta("Purchase", {
+          content_ids: ultimo.ids,
+          content_type: "product",
+          num_items: ultimo.itens,
+          value: ultimo.valor,
+          currency: "BRL"
+        }, { eventID: ultimo.pedido });
+        ultimo.rastreado = true;
+        localStorage.setItem("loja_ultimo_pedido", JSON.stringify(ultimo));
+      } catch (e) { /* ignora */ }
+    })();
+
     // Esvazia o carrinho, já que a compra foi concluída
     esvaziarCarrinho();
   </script>
