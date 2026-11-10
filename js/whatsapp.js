@@ -8,7 +8,7 @@
  * Assim que você tiver o número, edite só essa linha aqui — o botão
  * aparece automaticamente em todas as páginas do site.
  */
-const NUMERO_WHATSAPP = "5500000000000"; // <-- troque pelo seu número
+const NUMERO_WHATSAPP = "5512936328681"; // (12) 93632-8681
 const MENSAGEM_PADRAO = "Olá! Vim pelo site da Térmica Market e tenho uma dúvida.";
 
 function inserirBotaoWhatsapp() {
