@@ -430,8 +430,51 @@ function calcularFretePedido(itens, subtotal, cep) {
   };
 }
 
+/**
+ * CUPONS DE DESCONTO
+ * -------------------
+ * Cada cupom tem um percentual de desconto sobre os PRODUTOS (o frete não
+ * tem desconto) e uma data de validade. Depois da data, o cupom deixa de
+ * funcionar sozinho, no site e no servidor.
+ *   percentual -> % de desconto (ex: 10 = 10%)
+ *   validoAte  -> data e hora final, no horário de Brasília (-03:00)
+ */
+const CUPONS = {
+  BLACK10: { percentual: 10, validoAte: "2026-11-30T23:59:59-03:00" }
+};
+
+/**
+ * CAMPANHA (banners de Black Friday)
+ * ----------------------------------
+ * Os banners aparecem enquanto o cupom da campanha estiver válido e somem
+ * sozinhos quando ele vence. Para desligar antes, troque ativa para false.
+ */
+const CAMPANHA = {
+  ativa: true,
+  cupom: "BLACK10",
+  nome: "Black November",
+  fim: "30/11"
+};
+
+/** Devolve { codigo, percentual } se o cupom existe e está no prazo, ou null. */
+function buscarCupom(codigo, agora) {
+  const chave = String(codigo == null ? "" : codigo).trim().toUpperCase();
+  if (!chave || !Object.prototype.hasOwnProperty.call(CUPONS, chave)) return null;
+  const cupom = CUPONS[chave];
+  const momento = typeof agora === "number" ? agora : Date.now();
+  if (cupom.validoDe && momento < Date.parse(cupom.validoDe)) return null;
+  if (cupom.validoAte && momento > Date.parse(cupom.validoAte)) return null;
+  return { codigo: chave, percentual: Number(cupom.percentual) };
+}
+
+/** Preço unitário com o desconto do cupom, arredondado em centavos. */
+function precoComCupom(preco, cupom) {
+  if (!cupom) return Number(preco);
+  return Math.round(Number(preco) * (100 - cupom.percentual)) / 100;
+}
+
 // Permite que as funções em /api usem esta mesma lista (preços confiáveis).
 // No navegador, "module" não existe e esta linha é ignorada.
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { PRODUTOS, FRETE_GRATIS_ACIMA, ufDoCep, pesoDoPedido, calcularFretePedido };
+  module.exports = { PRODUTOS, FRETE_GRATIS_ACIMA, ufDoCep, pesoDoPedido, calcularFretePedido, CUPONS, buscarCupom, precoComCupom };
 }

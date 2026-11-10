@@ -13,7 +13,7 @@
  * Requer a variável de ambiente MP_ACCESS_TOKEN (veja o README.md).
  */
 
-const { PRODUTOS, calcularFretePedido } = require("../js/produtos.js");
+const { PRODUTOS, calcularFretePedido, buscarCupom, precoComCupom } = require("../js/produtos.js");
 
 function limpar(valor, max) {
   return String(valor == null ? "" : valor).trim().slice(0, max);
@@ -61,7 +61,7 @@ function validarCliente(bruto) {
 }
 
 /** Monta os itens a partir do catálogo oficial (ignora preços do navegador). */
-function montarItens(itensRecebidos) {
+function montarItens(itensRecebidos, cupom) {
   if (!Array.isArray(itensRecebidos) || itensRecebidos.length === 0) {
     return { erro: "Carrinho vazio ou inválido." };
   }
@@ -83,7 +83,8 @@ function montarItens(itensRecebidos) {
       id: produto.id,
       title: produto.nome.slice(0, 250),
       quantity: quantidade,
-      unit_price: Number(produto.preco),
+      unit_price: precoComCupom(produto.preco, cupom),
+      preco_cheio: Number(produto.preco),
       currency_id: "BRL"
     });
   }
@@ -113,7 +114,17 @@ module.exports = async function handler(req, res) {
   try {
     const corpo = req.body || {};
 
-    const resultadoItens = montarItens(corpo.itens);
+    // Cupom: o desconto é sempre recalculado aqui, a partir de js/produtos.js.
+    let cupom = null;
+    if (corpo.cupom) {
+      cupom = buscarCupom(corpo.cupom);
+      if (!cupom) {
+        res.status(400).json({ erro: "Cupom inválido ou expirado. Remova o cupom e tente de novo." });
+        return;
+      }
+    }
+
+    const resultadoItens = montarItens(corpo.itens, cupom);
     if (resultadoItens.erro) {
       res.status(400).json({ erro: resultadoItens.erro });
       return;
@@ -128,7 +139,8 @@ module.exports = async function handler(req, res) {
     const { itens } = resultadoItens;
     const { cliente } = resultadoCliente;
 
-    const subtotal = itens.reduce((t, i) => t + i.unit_price * i.quantity, 0);
+    // O frete grátis considera o valor dos produtos antes do cupom.
+    const subtotal = itens.reduce((t, i) => t + i.preco_cheio * i.quantity, 0);
     // O frete vem do CEP (e do peso do pedido), nunca do navegador.
     const resultadoFrete = calcularFretePedido(
       itens.map((i) => ({ id: i.id, quantidade: i.quantity })),
@@ -141,7 +153,7 @@ module.exports = async function handler(req, res) {
     }
     const frete = resultadoFrete.valor;
 
-    const itensMercadoPago = itens.map((i) => ({ ...i }));
+    const itensMercadoPago = itens.map(({ preco_cheio, ...i }) => ({ ...i }));
     if (frete > 0) {
       itensMercadoPago.push({
         id: "frete",
@@ -193,7 +205,8 @@ module.exports = async function handler(req, res) {
             cidade: cliente.cidade,
             uf: cliente.uf,
             frete: frete.toFixed(2),
-            frete_regiao: resultadoFrete.regiaoNome
+            frete_regiao: resultadoFrete.regiaoNome,
+            cupom: cupom ? `${cupom.codigo} (${cupom.percentual}% off)` : ""
           },
           notification_url: `${hospedagem}/api/webhook`,
           back_urls: {

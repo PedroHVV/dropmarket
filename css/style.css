@@ -1223,3 +1223,174 @@ a {
   cursor: not-allowed;
   background-image: linear-gradient(135deg, transparent 45%, #666 46%, #666 54%, transparent 55%);
 }
+
+/* ===== Campanha Black November ===== */
+.barra-promo.barra-black {
+  background: #050608;
+  color: #e9eef3;
+}
+.barra-promo.barra-black strong { color: #fff; }
+
+.faixa-black {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 18px 0 6px;
+  padding: 18px 22px;
+  border-radius: var(--raio);
+  background: radial-gradient(circle at 85% 20%, rgba(47, 143, 209, 0.35), transparent 55%), #07090c;
+  color: #fff;
+  box-shadow: var(--sombra-forte);
+}
+.fb-selo { margin: 0; font-size: 0.75rem; letter-spacing: 0.18em; color: #8cc8f0; font-weight: 700; }
+.fb-titulo { margin: 4px 0 2px; font-size: 1.15rem; line-height: 1.35; }
+.fb-titulo strong { font-size: 1.35rem; }
+.fb-cupom {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1.5px dashed #5fb4ea;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fff;
+}
+.fb-prazo { margin: 0; font-size: 0.82rem; color: #aab6c2; }
+.fb-botao, .bl-botao {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cor-primaria);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.fb-botao:hover, .bl-botao:hover { background: var(--cor-primaria-escura); transform: translateY(-1px); }
+.fb-botao.ativado, .bl-botao.ativado { background: #12895f; }
+
+.banner-lateral { display: none; }
+@media (min-width: 1500px) {
+  .banner-lateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-42%);
+    width: 172px;
+    padding: 18px 14px 16px;
+    border-radius: 16px;
+    background: radial-gradient(circle at 50% 0%, rgba(47, 143, 209, 0.38), transparent 60%), #07090c;
+    color: #fff;
+    text-align: center;
+    box-shadow: var(--sombra-forte);
+    z-index: 20;
+  }
+  .banner-esquerda { left: calc((100vw - 1100px) / 2 - 196px); }
+  .banner-direita { right: calc((100vw - 1100px) / 2 - 196px); }
+}
+.bl-selo { margin: 0; font-size: 0.7rem; letter-spacing: 0.16em; font-weight: 700; color: #8cc8f0; line-height: 1.4; }
+.bl-pct { margin: 6px 0 0; font-size: 3.1rem; font-weight: 800; line-height: 1; }
+.bl-pct span { display: block; font-size: 1.35rem; letter-spacing: 0.2em; color: #5fb4ea; margin-top: 2px; }
+.bl-sub { margin: 4px 0 10px; font-size: 0.8rem; color: #c7d2dc; }
+.bl-foto { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+.bl-rotulo { margin: 0; font-size: 0.72rem; color: #aab6c2; text-transform: uppercase; letter-spacing: 0.1em; }
+.bl-cupom {
+  margin: 4px 0 12px;
+  padding: 4px 12px;
+  border: 1.5px dashed #5fb4ea;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+}
+.bl-botao { width: 100%; padding: 10px 8px; font-size: 0.88rem; }
+.bl-prazo { margin: 10px 0 0; font-size: 0.75rem; color: #aab6c2; line-height: 1.4; }
+
+.aviso-campanha {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 20px);
+  background: #07090c;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  box-shadow: var(--sombra-forte);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 60;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+}
+.aviso-campanha.visivel { opacity: 1; transform: translate(-50%, 0); }
+
+.preco-cupom {
+  margin: 0 0 4px;
+  font-size: 0.82rem;
+  color: #07090c;
+}
+.preco-cupom strong { font-size: 0.95rem; }
+.preco-cupom .tag-cupom {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: #07090c;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+/* Cupom no carrinho */
+.caixa-cupom {
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--cor-borda);
+}
+.caixa-cupom label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+.linha-cupom { display: flex; gap: 8px; }
+.linha-cupom input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+.botao-cupom {
+  background: var(--cor-escura);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+}
+.mensagem-cupom { margin: 6px 0 0; font-size: 0.82rem; color: var(--cor-perigo); }
+.cupom-aplicado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #0f6b4d;
+}
+.link-cupom {
+  background: none;
+  border: 0;
+  color: var(--cor-texto-suave);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+.linha-desconto span { color: #0f7b5f; font-weight: 600; }
+
+@media (max-width: 640px) {
+  .faixa-black { flex-direction: column; align-items: stretch; text-align: center; padding: 16px; }
+  .fb-titulo { font-size: 1.02rem; }
+  .fb-botao { width: 100%; }
+}

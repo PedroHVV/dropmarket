@@ -72,6 +72,7 @@ function montarPedido(pagamento) {
     total: pagamento.transaction_amount,
     metodo: pagamento.payment_type_id || pagamento.payment_method_id || "",
     frete: m.frete,
+    cupom: m.cupom || "",
     produtos,
     cliente: {
       nome: m.nome || [payer.first_name, payer.last_name].filter(Boolean).join(" "),
@@ -101,6 +102,7 @@ function textoDoPedido(p) {
     "PRODUTOS",
     linhasProdutos || "(itens não informados - veja no painel do Mercado Pago)",
     "",
+    p.cupom ? `Cupom usado: ${p.cupom} (já descontado nos preços acima)` : "",
     `Frete cobrado: ${reais(p.frete)}`,
     `Total pago: ${reais(p.total)}`,
     "",
@@ -134,6 +136,7 @@ function htmlDoPedido(p) {
 
     <h3 style="margin:16px 0 6px">Produtos</h3>
     <ul style="margin:0;padding-left:20px">${itens || "<li>Veja os itens no painel do Mercado Pago</li>"}</ul>
+    ${p.cupom ? `<p style="margin:8px 0 0">Cupom usado: <strong>${esc(p.cupom)}</strong> (já descontado nos preços)</p>` : ""}
     <p style="margin:8px 0 0">Frete: ${reais(p.frete)} · <strong>Total pago: ${reais(p.total)}</strong></p>
 
     <h3 style="margin:16px 0 6px">Entregar para</h3>
@@ -181,6 +184,7 @@ function htmlParaCliente(p) {
     <h3 style="margin:18px 0 6px;color:#15324a">Resumo do pedido</h3>
     <table style="width:100%;border-collapse:collapse;font-size:15px">
       ${itens || '<tr><td style="padding:6px 0">Itens do pedido</td><td></td></tr>'}
+      ${p.cupom ? `<tr><td style="padding:6px 0;color:#0f7b5f" colspan="2">Cupom ${esc(p.cupom)} aplicado nos preços acima</td></tr>` : ""}
       <tr><td style="padding:6px 0;border-top:1px solid #e3e8ee">Frete</td>
           <td style="padding:6px 0;border-top:1px solid #e3e8ee;text-align:right">${Number(p.frete) > 0 ? reais(p.frete) : "Grátis"}</td></tr>
       <tr><td style="padding:6px 0"><strong>Total pago</strong></td>

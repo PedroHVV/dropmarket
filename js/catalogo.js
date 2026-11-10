@@ -39,6 +39,14 @@ function linkTamanho(tamanho) {
   return `tamanho.html?tamanho=${encodeURIComponent(tamanho)}`;
 }
 
+/** Linha "R$ X com o cupom" enquanto a campanha estiver ativa. */
+function linhaCupomHtml(produto) {
+  if (typeof CAMPANHA === "undefined" || !CAMPANHA.ativa || typeof buscarCupom !== "function") return "";
+  const cupom = buscarCupom(CAMPANHA.cupom);
+  if (!cupom) return "";
+  return `<p class="preco-cupom"><strong>${formatarPreco(precoComCupom(produto.preco, cupom))}</strong> com o cupom <span class="tag-cupom">${esc(cupom.codigo)}</span></p>`;
+}
+
 /** Desconto em % entre o preço antigo (precoDe) e o preço de venda, ou 0. */
 function descontoDoProduto(produto) {
   if (!produto.precoDe || produto.precoDe <= produto.preco) return 0;
@@ -109,6 +117,7 @@ function cartaoProdutoHtml(produto, variantes = [produto]) {
         <h3>${esc(produto.nome)}</h3>
         <p class="descricao-produto">${esc(produto.descricao)}</p>
         <p class="preco-produto">${precoAntigo}${formatarPreco(produto.preco)}</p>
+        ${linhaCupomHtml(produto)}
         <p class="aviso-pix">Pix: aprovação na hora</p>
         <button class="botao botao-primario" data-adicionar="${esc(produto.id)}" ${esgotado ? "disabled" : ""}>
           ${esgotado ? "Esgotado" : "Adicionar ao carrinho"}

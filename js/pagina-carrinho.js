@@ -48,6 +48,70 @@ function somenteDigitos(texto) {
   return String(texto || "").replace(/\D/g, "");
 }
 
+const CHAVE_CUPOM = "loja_cupom";
+let mensagemCupom = "";
+
+/** Cupom salvo no navegador, se ainda for válido (vencido é apagado sozinho). */
+function cupomAtual() {
+  try {
+    const salvo = localStorage.getItem(CHAVE_CUPOM);
+    if (!salvo) return null;
+    const cupom = buscarCupom(salvo);
+    if (!cupom) localStorage.removeItem(CHAVE_CUPOM);
+    return cupom;
+  } catch (e) {
+    return null;
+  }
+}
+
+/** Valor do desconto do cupom sobre os produtos do carrinho. */
+function descontoCarrinho(cupom) {
+  if (!cupom) return 0;
+  const total = obterCarrinho().reduce(
+    (t, i) => t + (i.preco - precoComCupom(i.preco, cupom)) * i.quantidade, 0);
+  return Math.round(total * 100) / 100;
+}
+
+function aplicarCupom() {
+  const campo = document.getElementById("campo-cupom");
+  const codigo = campo ? campo.value.trim().toUpperCase() : "";
+  if (!codigo) {
+    mensagemCupom = "Digite o código do cupom.";
+  } else if (!buscarCupom(codigo)) {
+    mensagemCupom = "Cupom inválido ou expirado.";
+  } else {
+    try { localStorage.setItem(CHAVE_CUPOM, codigo); } catch (e) { /* ignora */ }
+    mensagemCupom = "";
+  }
+  renderizarCarrinho();
+}
+
+function removerCupom() {
+  try { localStorage.removeItem(CHAVE_CUPOM); } catch (e) { /* ignora */ }
+  mensagemCupom = "";
+  renderizarCarrinho();
+}
+
+function cupomHtml() {
+  const cupom = cupomAtual();
+  if (cupom) {
+    return `
+      <div class="caixa-cupom cupom-aplicado">
+        <span>✅ Cupom <strong>${esc(cupom.codigo)}</strong> aplicado: ${cupom.percentual}% de desconto nos produtos.</span>
+        <button type="button" id="botao-remover-cupom" class="link-cupom">Remover</button>
+      </div>`;
+  }
+  return `
+    <div class="caixa-cupom">
+      <label for="campo-cupom">Tem cupom de desconto?</label>
+      <div class="linha-cupom">
+        <input id="campo-cupom" type="text" autocomplete="off" placeholder="Ex: BLACK10" maxlength="20" />
+        <button type="button" id="botao-cupom" class="botao botao-cupom">Aplicar</button>
+      </div>
+      ${mensagemCupom ? `<p class="mensagem-cupom">${esc(mensagemCupom)}</p>` : ""}
+    </div>`;
+}
+
 /** Frete do carrinho atual, pelo CEP digitado (mesma regra usada no servidor). */
 function freteAtual() {
   const itens = obterCarrinho().map((i) => ({ id: i.id, quantidade: i.quantidade }));
@@ -57,13 +121,14 @@ function freteAtual() {
 /** Textos do resumo (frete, dica e total) conforme o CEP já digitado. */
 function textosResumo() {
   const subtotal = calcularTotalCarrinho();
+  const desconto = descontoCarrinho(cupomAtual());
   const f = freteAtual();
 
   if (f.valor === null) {
     return {
       frete: "Informe o CEP",
       dica: "O frete é calculado pelo seu CEP.",
-      total: `${formatarPreco(subtotal)} <small>+ frete</small>`
+      total: `${formatarPreco(subtotal - desconto)} <small>+ frete</small>`
     };
   }
 
@@ -76,7 +141,7 @@ function textosResumo() {
   return {
     frete: f.gratis ? "Grátis" : formatarPreco(f.valor),
     dica,
-    total: formatarPreco(subtotal + f.valor)
+    total: formatarPreco(subtotal - desconto + f.valor)
   };
 }
 
@@ -165,7 +230,9 @@ function renderizarCarrinho() {
     <div class="lista-carrinho">${linhas}</div>
     ${formularioEntregaHtml()}
     <div class="resumo-carrinho">
+      ${cupomHtml()}
       <p class="linha-resumo">Subtotal: <span>${formatarPreco(subtotal)}</span></p>
+      ${cupomAtual() ? `<p class="linha-resumo linha-desconto">Desconto (${esc(cupomAtual().codigo)}): <span>− ${formatarPreco(descontoCarrinho(cupomAtual()))}</span></p>` : ""}
       <p class="linha-resumo">Frete: <span id="valor-frete">${resumo.frete}</span></p>
       <p class="dica-frete" id="dica-frete">${resumo.dica}</p>
       <p class="total-carrinho">Total: <strong id="valor-total">${resumo.total}</strong></p>
@@ -205,6 +272,17 @@ function renderizarCarrinho() {
 
   ligarFormulario();
   document.getElementById("botao-checkout").addEventListener("click", iniciarCheckout);
+
+  const botaoCupom = document.getElementById("botao-cupom");
+  if (botaoCupom) botaoCupom.addEventListener("click", aplicarCupom);
+  const campoCupom = document.getElementById("campo-cupom");
+  if (campoCupom) {
+    campoCupom.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); aplicarCupom(); }
+    });
+  }
+  const botaoRemoverCupom = document.getElementById("botao-remover-cupom");
+  if (botaoRemoverCupom) botaoRemoverCupom.addEventListener("click", removerCupom);
 }
 
 function ligarFormulario() {
@@ -325,7 +403,8 @@ async function iniciarCheckout() {
   }
 
   const freteCheckout = freteAtual();
-  const valorPedido = Number((calcularTotalCarrinho() + (freteCheckout.valor || 0)).toFixed(2));
+  const cupomPedido = cupomAtual();
+  const valorPedido = Number((calcularTotalCarrinho() - descontoCarrinho(cupomPedido) + (freteCheckout.valor || 0)).toFixed(2));
   const idsPedido = carrinho.map((i) => i.id);
   const qtdPedido = carrinho.reduce((t, i) => t + i.quantidade, 0);
   if (typeof rastrearMeta === "function") {
@@ -349,6 +428,7 @@ async function iniciarCheckout() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         itens: carrinho.map((i) => ({ id: i.id, quantidade: i.quantidade })),
+        cupom: cupomPedido ? cupomPedido.codigo : undefined,
         cliente: {
           nome: dadosCliente.nome.trim(),
           email: dadosCliente.email.trim(),
