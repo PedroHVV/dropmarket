@@ -5,7 +5,7 @@
  * compras, para os anúncios saberem quem compra. Para trocar de pixel,
  * mude só o número abaixo.
  */
-const META_PIXEL_ID = "1934196300894855";
+const META_PIXEL_ID = "29526625536930555";
 
 /* Código oficial da Meta (base do pixel) */
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
