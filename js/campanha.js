@@ -76,13 +76,13 @@
     avisar(`Cupom ${cupom.codigo} ativado! O desconto de ${pct}% aparece no carrinho.`);
   }
 
-  function lateralHtml(lado, imagem) {
+  function lateralHtml(lado) {
     return `
       <aside class="banner-lateral banner-${lado}" aria-label="${nome}: ${pct}% de desconto">
         <p class="bl-selo">${nome.toUpperCase()}</p>
         <p class="bl-pct">${pct}%<span>OFF</span></p>
         <p class="bl-sub">em todo o site</p>
-        <img src="${imagem}" alt="" class="bl-foto" loading="lazy" />
+        <span class="bl-divisor" aria-hidden="true"></span>
         <p class="bl-rotulo">use o cupom</p>
         <p class="bl-cupom">${codigo}</p>
         <button type="button" class="bl-botao" data-ativar-cupom>${textoBotao()}</button>
@@ -119,8 +119,8 @@
     ancora.insertAdjacentHTML(hero ? "afterend" : "beforebegin", faixaHtml());
 
     document.body.insertAdjacentHTML("beforeend",
-      lateralHtml("esquerda", "img/banner-lilas.jpg") +
-      lateralHtml("direita", "img/banner-verde.jpg"));
+      lateralHtml("esquerda") +
+      lateralHtml("direita"));
 
     document.querySelectorAll("[data-ativar-cupom]").forEach((b) => {
       if (cupomJaAtivo()) b.classList.add("ativado");

@@ -1236,7 +1236,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin: 18px 0 6px;
+  margin: 18px 0 16px;
   padding: 18px 22px;
   border-radius: var(--raio);
   background: radial-gradient(circle at 85% 20%, rgba(47, 143, 209, 0.35), transparent 55%), #07090c;
@@ -1277,11 +1277,12 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    top: 50%;
-    transform: translateY(-42%);
+    position: absolute;
+    top: 135px;
     width: 172px;
-    padding: 18px 14px 16px;
+    min-height: 440px;
+    justify-content: center;
+    padding: 26px 14px 22px;
     border-radius: 16px;
     background: radial-gradient(circle at 50% 0%, rgba(47, 143, 209, 0.38), transparent 60%), #07090c;
     color: #fff;
@@ -1293,10 +1294,10 @@ a {
   .banner-direita { right: calc((100vw - 1100px) / 2 - 196px); }
 }
 .bl-selo { margin: 0; font-size: 0.7rem; letter-spacing: 0.16em; font-weight: 700; color: #8cc8f0; line-height: 1.4; }
-.bl-pct { margin: 6px 0 0; font-size: 3.1rem; font-weight: 800; line-height: 1; }
+.bl-pct { margin: 14px 0 0; font-size: 3.6rem; font-weight: 800; line-height: 1; }
 .bl-pct span { display: block; font-size: 1.35rem; letter-spacing: 0.2em; color: #5fb4ea; margin-top: 2px; }
-.bl-sub { margin: 4px 0 10px; font-size: 0.8rem; color: #c7d2dc; }
-.bl-foto { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+.bl-sub { margin: 6px 0 0; font-size: 0.85rem; color: #c7d2dc; }
+.bl-divisor { display: block; width: 48px; height: 2px; margin: 22px auto; background: #5fb4ea; border-radius: 2px; }
 .bl-rotulo { margin: 0; font-size: 0.72rem; color: #aab6c2; text-transform: uppercase; letter-spacing: 0.1em; }
 .bl-cupom {
   margin: 4px 0 12px;
