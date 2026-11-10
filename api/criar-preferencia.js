@@ -91,6 +91,21 @@ function montarItens(itensRecebidos, cupom) {
   return { itens };
 }
 
+/** Cidade oficial do CEP (ViaCEP). Em caso de falha, devolve "". */
+async function cidadeDoCep(cep) {
+  try {
+    const controle = new AbortController();
+    const espera = setTimeout(() => controle.abort(), 3500);
+    const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: controle.signal });
+    clearTimeout(espera);
+    if (!resposta.ok) return "";
+    const dados = await resposta.json();
+    return dados && !dados.erro ? String(dados.localidade || "") : "";
+  } catch (e) {
+    return "";
+  }
+}
+
 function gerarNumeroPedido() {
   const agora = Date.now().toString(36).toUpperCase();
   const aleatorio = Math.random().toString(36).slice(2, 5).toUpperCase();
@@ -142,10 +157,13 @@ module.exports = async function handler(req, res) {
     // O frete grátis considera o valor dos produtos antes do cupom.
     const subtotal = itens.reduce((t, i) => t + i.preco_cheio * i.quantity, 0);
     // O frete vem do CEP (e do peso do pedido), nunca do navegador.
+    // A cidade vem da consulta oficial do CEP; se ela falhar, usa a digitada.
+    const cidadeOficial = (await cidadeDoCep(cliente.cep)) || cliente.cidade;
     const resultadoFrete = calcularFretePedido(
       itens.map((i) => ({ id: i.id, quantidade: i.quantity })),
       subtotal,
-      cliente.cep
+      cliente.cep,
+      cidadeOficial
     );
     if (resultadoFrete.valor === null) {
       res.status(400).json({ erro: "Não conseguimos calcular o frete para este CEP. Confira o CEP informado." });

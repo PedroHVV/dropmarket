@@ -335,7 +335,44 @@ const PRODUTOS = [
  *                          "kgExtra" é o valor de cada kg acima da última faixa
  */
 const FRETE_GRATIS_ACIMA = 199.00;
-const FRETE_GRATIS_REGIOES = ["goias", "centroOeste", "sudeste", "sul"];
+const FRETE_GRATIS_REGIOES = ["goiania", "goias", "centroOeste", "sudeste", "sul"];
+
+/**
+ * FRETE FIXO PARA GOIÂNIA E REGIÃO METROPOLITANA
+ * Pedidos para as cidades abaixo pagam um valor fixo, qualquer que seja o
+ * peso. A cidade é conferida pelo CEP (o servidor consulta o CEP nos Correios
+ * via ViaCEP). Para desligar, use valor: null.
+ */
+const FRETE_LOCAL = {
+  nome: "Goiânia e região metropolitana",
+  valor: 12.99,
+  uf: "GO",
+  cidades: [
+    "Goiânia", "Abadia de Goiás", "Aparecida de Goiânia", "Aragoiânia",
+    "Bela Vista de Goiás", "Bonfinópolis", "Brazabrantes", "Caldazinha",
+    "Caturaí", "Goianápolis", "Goianira", "Guapó", "Hidrolândia", "Inhumas",
+    "Nerópolis", "Nova Veneza", "Santa Bárbara de Goiás",
+    "Santo Antônio de Goiás", "Senador Canedo", "Terezópolis de Goiás", "Trindade"
+  ],
+  // Se a cidade não for informada, estes CEPs (Goiânia e Aparecida) já contam como locais.
+  faixasCep: [[74000000, 74999999]]
+};
+
+function normalizarCidade(texto) {
+  return String(texto == null ? "" : texto)
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase().replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** true se o CEP/cidade recebem o frete fixo local. */
+function ehFreteLocal(cep, cidade) {
+  if (!FRETE_LOCAL || FRETE_LOCAL.valor == null) return false;
+  if (ufDoCep(cep) !== FRETE_LOCAL.uf) return false;
+  const nome = normalizarCidade(cidade);
+  if (nome) return FRETE_LOCAL.cidades.some((c) => normalizarCidade(c) === nome);
+  const n = Number(String(cep == null ? "" : cep).replace(/\D/g, ""));
+  return (FRETE_LOCAL.faixasCep || []).some((f) => n >= f[0] && n <= f[1]);
+}
 
 const FRETE_FAIXAS_G = [1000, 2000, 3000, 5000];
 
@@ -397,13 +434,28 @@ function pesoDoPedido(itens) {
  * Devolve { valor, gratis, regiao, regiaoNome, uf, pesoG }, ou
  * { valor: null } quando o CEP ainda não é válido.
  */
-function calcularFretePedido(itens, subtotal, cep) {
+function calcularFretePedido(itens, subtotal, cep, cidade) {
   const uf = ufDoCep(cep);
   const regiao = FRETE_REGIAO_DA_UF[uf];
   if (!regiao) return { valor: null, gratis: false, regiao: "", regiaoNome: "", uf: "", pesoG: 0 };
 
-  const tabela = FRETE_TABELA[regiao];
   const pesoG = pesoDoPedido(itens);
+
+  // Goiânia e região metropolitana: frete fixo
+  if (ehFreteLocal(cep, cidade)) {
+    const gratisLocal =
+      FRETE_GRATIS_ACIMA > 0 && subtotal >= FRETE_GRATIS_ACIMA && FRETE_GRATIS_REGIOES.includes("goiania");
+    return {
+      valor: gratisLocal ? 0 : FRETE_LOCAL.valor,
+      gratis: gratisLocal,
+      regiao: "goiania",
+      regiaoNome: FRETE_LOCAL.nome,
+      uf,
+      pesoG
+    };
+  }
+
+  const tabela = FRETE_TABELA[regiao];
   const idx = FRETE_FAIXAS_G.findIndex((limite) => pesoG <= limite);
 
   let valor;
@@ -476,5 +528,5 @@ function precoComCupom(preco, cupom) {
 // Permite que as funções em /api usem esta mesma lista (preços confiáveis).
 // No navegador, "module" não existe e esta linha é ignorada.
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { PRODUTOS, FRETE_GRATIS_ACIMA, ufDoCep, pesoDoPedido, calcularFretePedido, CUPONS, buscarCupom, precoComCupom };
+  module.exports = { PRODUTOS, FRETE_GRATIS_ACIMA, ufDoCep, pesoDoPedido, calcularFretePedido, ehFreteLocal, normalizarCidade, CUPONS, buscarCupom, precoComCupom };
 }

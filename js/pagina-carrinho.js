@@ -115,7 +115,7 @@ function cupomHtml() {
 /** Frete do carrinho atual, pelo CEP digitado (mesma regra usada no servidor). */
 function freteAtual() {
   const itens = obterCarrinho().map((i) => ({ id: i.id, quantidade: i.quantidade }));
-  return calcularFretePedido(itens, calcularTotalCarrinho(), dadosCliente.cep);
+  return calcularFretePedido(itens, calcularTotalCarrinho(), dadosCliente.cep, dadosCliente.cidade);
 }
 
 /** Textos do resumo (frete, dica e total) conforme o CEP já digitado. */
@@ -309,7 +309,7 @@ function ligarFormulario() {
       dadosCliente[nome] = valor;
       input.classList.remove("campo-invalido");
       salvarDadosCliente();
-      if (nome === "cep") atualizarResumo();
+      if (nome === "cep" || nome === "cidade") atualizarResumo();
 
       if (nome === "cep" && somenteDigitos(valor).length === 8) {
         buscarCep(somenteDigitos(valor), form);
@@ -340,6 +340,7 @@ async function buscarCep(cep, form) {
       }
     });
     salvarDadosCliente();
+    atualizarResumo();
 
     // Leva o cursor direto para o número (o que o cliente ainda precisa digitar)
     if (form.elements.numero && !dadosCliente.numero) {
