@@ -180,36 +180,6 @@ const PRODUTOS = [
     estoque: 5
   },
   {
-    id: "prod-003-pink",
-    grupo: "long-neck-400",
-    cor: "Pink",
-    corHex: "#e7567f",
-    tamanho: "400ml",
-    nome: "Copo Porta Long Neck 400ml (2 tampas) – Pink",
-    precoDe: 99.90,
-    preco: 79.90,
-    imagem: "img/copo-long-neck-400ml-pink.jpg",
-    imagens: ["img/copo-long-neck-400ml-pink.jpg", "img/copo-long-neck-400ml-pink-2.jpg"],
-    descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Pink. Mede 14 cm de altura e pesa 200 g.",
-    pesoEnvio: 450,
-    estoque: 5
-  },
-  {
-    id: "prod-003-verde-militar",
-    grupo: "long-neck-400",
-    cor: "Verde militar",
-    corHex: "#616241",
-    tamanho: "400ml",
-    nome: "Copo Porta Long Neck 400ml (2 tampas) – Verde militar",
-    precoDe: 99.90,
-    preco: 79.90,
-    imagem: "img/copo-long-neck-400ml-verde-militar.jpg",
-    imagens: ["img/copo-long-neck-400ml-verde-militar.jpg", "img/copo-long-neck-400ml-verde-militar-2.jpg"],
-    descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Verde militar. Mede 14 cm de altura e pesa 200 g.",
-    pesoEnvio: 450,
-    estoque: 5
-  },
-  {
     id: "prod-003-laranja",
     grupo: "long-neck-400",
     cor: "Laranja",
@@ -225,21 +195,6 @@ const PRODUTOS = [
     estoque: 5
   },
   {
-    id: "prod-003-rosa-claro",
-    grupo: "long-neck-400",
-    cor: "Rosa claro",
-    corHex: "#e59fc0",
-    tamanho: "400ml",
-    nome: "Copo Porta Long Neck 400ml (2 tampas) – Rosa claro",
-    precoDe: 99.90,
-    preco: 79.90,
-    imagem: "img/copo-long-neck-400ml-rosa-claro.jpg",
-    imagens: ["img/copo-long-neck-400ml-rosa-claro.jpg", "img/copo-long-neck-400ml-rosa-claro-2.jpg"],
-    descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Rosa claro. Mede 14 cm de altura e pesa 200 g.",
-    pesoEnvio: 450,
-    estoque: 5
-  },
-  {
     id: "prod-003-azul-royal",
     grupo: "long-neck-400",
     cor: "Azul royal",
@@ -251,21 +206,6 @@ const PRODUTOS = [
     imagem: "img/copo-long-neck-400ml-azul-royal.jpg",
     imagens: ["img/copo-long-neck-400ml-azul-royal.jpg", "img/copo-long-neck-400ml-azul-royal-2.jpg", "img/copo-long-neck-400ml-azul-royal-3.jpg"],
     descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Azul royal. Mede 14 cm de altura e pesa 200 g.",
-    pesoEnvio: 450,
-    estoque: 5
-  },
-  {
-    id: "prod-003-verde",
-    grupo: "long-neck-400",
-    cor: "Verde",
-    corHex: "#327754",
-    tamanho: "400ml",
-    nome: "Copo Porta Long Neck 400ml (2 tampas) – Verde",
-    precoDe: 99.90,
-    preco: 79.90,
-    imagem: "img/copo-long-neck-400ml-verde.jpg",
-    imagens: ["img/copo-long-neck-400ml-verde.jpg", "img/copo-long-neck-400ml-verde-2.jpg"],
-    descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Verde. Mede 14 cm de altura e pesa 200 g.",
     pesoEnvio: 450,
     estoque: 5
   },
