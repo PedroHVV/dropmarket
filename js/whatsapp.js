@@ -22,4 +22,16 @@ function inserirBotaoWhatsapp() {
   document.body.appendChild(link);
 }
 
-document.addEventListener("DOMContentLoaded", inserirBotaoWhatsapp);
+const MENSAGEM_GRAVACAO = "Olá! Vim pelo site da Térmica Market e quero a gravação a laser (+R$ 15) em uma garrafa/copo.";
+
+// Links "Quero personalizar" (qualquer elemento com data-whatsapp-gravacao)
+function preencherLinksGravacao() {
+  document.querySelectorAll("[data-whatsapp-gravacao]").forEach((a) => {
+    a.href = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(MENSAGEM_GRAVACAO)}`;
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  inserirBotaoWhatsapp();
+  preencherLinksGravacao();
+});
