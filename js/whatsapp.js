@@ -22,16 +22,40 @@ function inserirBotaoWhatsapp() {
   document.body.appendChild(link);
 }
 
-const MENSAGEM_GRAVACAO = "Olá! Vim pelo site da Térmica Market e quero a gravação a laser (+R$ 15) em uma garrafa/copo.";
+function precoGravacaoAtual() {
+  if (typeof precoGravacao === "function") return precoGravacao();
+  return 15;
+}
+
+function mensagemGravacao() {
+  return `Olá! Vim pelo site da Térmica Market e quero a gravação a laser (+R$ ${precoGravacaoAtual()}) em uma garrafa/copo.`;
+}
+
+/** Mostra o preço da gravação: na Black November aparece o normal riscado e o preço promocional. */
+function preencherPrecoGravacao() {
+  const preco = precoGravacaoAtual();
+  const normal = typeof GRAVACAO !== "undefined" ? GRAVACAO.normal : 15;
+  document.querySelectorAll("[data-preco-gravacao]").forEach((el) => {
+    el.innerHTML = preco < normal
+      ? `<s class="gravacao-riscado">R$ ${normal}</s> R$ ${preco}`
+      : `R$ ${preco}`;
+  });
+  document.querySelectorAll("[data-preco-gravacao-faq]").forEach((el) => {
+    el.textContent = preco < normal
+      ? `R$ ${preco} (preço da Black November, válido até 30/11; depois, R$ ${normal})`
+      : `R$ ${preco}`;
+  });
+}
 
 // Links "Quero personalizar" (qualquer elemento com data-whatsapp-gravacao)
 function preencherLinksGravacao() {
   document.querySelectorAll("[data-whatsapp-gravacao]").forEach((a) => {
-    a.href = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(MENSAGEM_GRAVACAO)}`;
+    a.href = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagemGravacao())}`;
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   inserirBotaoWhatsapp();
   preencherLinksGravacao();
+  preencherPrecoGravacao();
 });

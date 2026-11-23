@@ -1,91 +1,55 @@
 /**
  * CAMPANHA DE BLACK FRIDAY (Black November)
  * ------------------------------------------
- * Mostra os banners da campanha enquanto o cupom de CAMPANHA (js/produtos.js)
- * estiver válido. Quando o cupom vence, tudo some sozinho e a barra do topo
- * volta ao texto normal. Nada aqui precisa ser editado: valores, código e
- * data vêm de CUPONS e CAMPANHA em js/produtos.js.
+ * Mostra os banners da campanha enquanto a promoção estiver valendo (até
+ * PROMOCAO_ATE, em js/produtos.js). Passou a data, tudo some sozinho e a
+ * barra do topo volta ao texto normal.
  *
- * Também ativa o cupom automaticamente quando o cliente chega por um link
- * com ?cupom=CODIGO (ex: termicamarket.com.br/?cupom=BLACK10), útil nos anúncios.
+ * Não usa cupom: os preços da promoção já aparecem direto nos produtos
+ * (preço normal riscado e preço da promoção). O "até X% OFF" dos banners é
+ * calculado sozinho a partir do maior desconto entre os produtos.
  */
 (function () {
   if (typeof CAMPANHA === "undefined" || !CAMPANHA.ativa) return;
-  if (typeof buscarCupom !== "function") return;
-
-  const cupom = buscarCupom(CAMPANHA.cupom);
-  if (!cupom) return;
-
-  const CHAVE = "loja_cupom";
+  if (typeof promocaoAtiva !== "function" || !promocaoAtiva()) return;
 
   function escHtml(texto) {
     return String(texto == null ? "" : texto)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  function salvarCupom(codigo) {
-    try { localStorage.setItem(CHAVE, codigo); } catch (e) { /* ignora */ }
+  function maiorDesconto() {
+    let maior = 0;
+    PRODUTOS.forEach((p) => {
+      if (p.precoDe && p.precoDe > p.preco) {
+        maior = Math.max(maior, Math.round((1 - p.preco / p.precoDe) * 100));
+      }
+    });
+    return maior;
   }
-
-  function cupomJaAtivo() {
-    try { return (localStorage.getItem(CHAVE) || "").toUpperCase() === cupom.codigo; } catch (e) { return false; }
-  }
-
-  // Cupom vindo do link do anúncio
-  try {
-    const doLink = new URLSearchParams(window.location.search).get("cupom");
-    if (doLink && buscarCupom(doLink)) salvarCupom(doLink.trim().toUpperCase());
-  } catch (e) { /* ignora */ }
 
   function textoPrazo() {
-    const fim = Date.parse(CUPONS[cupom.codigo].validoAte);
+    const fim = Date.parse(PROMOCAO_ATE);
     const dias = Math.ceil((fim - Date.now()) / 86400000);
     if (dias <= 1) return "Último dia!";
     return `Termina em ${dias} dias`;
   }
 
-  const codigo = escHtml(cupom.codigo);
-  const pct = cupom.percentual;
+  const pct = maiorDesconto();
+  if (pct <= 0) return;
   const nome = escHtml(CAMPANHA.nome || "Black Friday");
   const fim = escHtml(CAMPANHA.fim || "");
 
-  function textoBotao() {
-    return cupomJaAtivo() ? "Cupom ativado ✓" : "Ativar cupom";
-  }
-
-  function avisar(mensagem) {
-    let aviso = document.querySelector(".aviso-campanha");
-    if (!aviso) {
-      aviso = document.createElement("div");
-      aviso.className = "aviso-campanha";
-      aviso.setAttribute("role", "status");
-      document.body.appendChild(aviso);
-    }
-    aviso.textContent = mensagem;
-    aviso.classList.add("visivel");
-    clearTimeout(avisar.t);
-    avisar.t = setTimeout(() => aviso.classList.remove("visivel"), 3800);
-  }
-
-  function ativar() {
-    salvarCupom(cupom.codigo);
-    document.querySelectorAll("[data-ativar-cupom]").forEach((b) => {
-      b.textContent = textoBotao();
-      b.classList.add("ativado");
-    });
-    avisar(`Cupom ${cupom.codigo} ativado! O desconto de ${pct}% aparece no carrinho.`);
-  }
-
   function lateralHtml(lado) {
     return `
-      <aside class="banner-lateral banner-${lado}" aria-label="${nome}: ${pct}% de desconto">
+      <aside class="banner-lateral banner-${lado}" aria-label="${nome}: até ${pct}% de desconto">
         <p class="bl-selo">${nome.toUpperCase()}</p>
+        <p class="bl-rotulo">até</p>
         <p class="bl-pct">${pct}%<span>OFF</span></p>
-        <p class="bl-sub">em todo o site</p>
+        <p class="bl-sub">em garrafas e copos</p>
         <span class="bl-divisor" aria-hidden="true"></span>
-        <p class="bl-rotulo">use o cupom</p>
-        <p class="bl-cupom">${codigo}</p>
-        <button type="button" class="bl-botao" data-ativar-cupom>${textoBotao()}</button>
+        <p class="bl-rotulo">preços especiais</p>
+        <a class="bl-botao" href="#grade-produtos">Ver ofertas</a>
         <p class="bl-prazo">${textoPrazo()}<br>até ${fim}</p>
       </aside>`;
   }
@@ -95,10 +59,10 @@
       <section class="faixa-black" aria-label="${nome}">
         <div class="fb-texto">
           <p class="fb-selo">🖤 ${nome.toUpperCase()}</p>
-          <p class="fb-titulo"><strong>${pct}% OFF</strong> em todo o site com o cupom <span class="fb-cupom">${codigo}</span></p>
+          <p class="fb-titulo"><strong>Até ${pct}% OFF</strong> em garrafas e copos térmicos</p>
           <p class="fb-prazo">${textoPrazo()} · válido até ${fim}</p>
         </div>
-        <button type="button" class="fb-botao" data-ativar-cupom>${textoBotao()}</button>
+        <a class="fb-botao" href="#grade-produtos">Ver ofertas</a>
       </section>`;
   }
 
@@ -107,7 +71,7 @@
     const barra = document.querySelector(".barra-promo");
     if (barra) {
       barra.classList.add("barra-black");
-      barra.innerHTML = `🖤 <strong>${nome.toUpperCase()}</strong> · ${pct}% OFF em tudo com o cupom <strong>${codigo}</strong> · até ${fim}`;
+      barra.innerHTML = `🖤 <strong>${nome.toUpperCase()}</strong> · até ${pct}% OFF em garrafas e copos · até ${fim}`;
     }
 
     // Banners só nas páginas de produtos
@@ -121,10 +85,5 @@
     document.body.insertAdjacentHTML("beforeend",
       lateralHtml("esquerda") +
       lateralHtml("direita"));
-
-    document.querySelectorAll("[data-ativar-cupom]").forEach((b) => {
-      if (cupomJaAtivo()) b.classList.add("ativado");
-      b.addEventListener("click", ativar);
-    });
   });
 })();

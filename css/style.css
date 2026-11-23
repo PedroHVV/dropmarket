@@ -1430,3 +1430,7 @@ a {
   .fl-titulo { font-size: 1.02rem; }
   .fl-botao { text-align: center; }
 }
+
+/* Botões de "Ver ofertas" (links) e preço riscado da gravação a laser */
+a.fb-botao, a.bl-botao { display: inline-block; text-align: center; text-decoration: none; }
+.gravacao-riscado { font-weight: 400; opacity: 0.65; font-size: 0.85em; }

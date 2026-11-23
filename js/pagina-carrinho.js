@@ -93,6 +93,8 @@ function removerCupom() {
 }
 
 function cupomHtml() {
+  // Sem cupons ativos, a caixa de cupom nem aparece.
+  if (typeof CUPONS !== "undefined" && Object.keys(CUPONS).length === 0) return "";
   const cupom = cupomAtual();
   if (cupom) {
     return `

@@ -9,7 +9,16 @@ const CHAVE_CARRINHO = "loja_carrinho";
 
 function obterCarrinho() {
   const dados = localStorage.getItem(CHAVE_CARRINHO);
-  return dados ? JSON.parse(dados) : [];
+  const itens = dados ? JSON.parse(dados) : [];
+  // O preço vem sempre do catálogo (a promoção pode ter acabado depois que o
+  // cliente colocou o item no carrinho).
+  if (typeof PRODUTOS !== "undefined") {
+    itens.forEach((item) => {
+      const produto = PRODUTOS.find((p) => p.id === item.id);
+      if (produto) item.preco = produto.preco;
+    });
+  }
+  return itens;
 }
 
 function salvarCarrinho(carrinho) {

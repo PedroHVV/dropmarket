@@ -34,7 +34,7 @@ const PRODUTOS = [
     tamanho: "500ml",
     nome: "Kit Garrafa Térmica de Café 500ml + 2 Xícaras – Verde",
     precoDe: 109.90,
-    preco: 79.90,
+    preco: 69.90,
     imagem: "img/garrafa-cafe-500ml-verde.jpg",
     imagens: ["img/garrafa-cafe-500ml-verde.jpg", "img/garrafa-cafe-500ml-verde-2.jpg", "img/garrafa-cafe-500ml-verde-3.jpg"],
     descricao: "Garrafa térmica de café com 500ml e 2 xícaras de inox que encaixam na tampa. Cor: Verde. A garrafa mede 22 cm de altura e pesa 250 g.",
@@ -49,7 +49,7 @@ const PRODUTOS = [
     tamanho: "500ml",
     nome: "Kit Garrafa Térmica de Café 500ml + 2 Xícaras – Preta",
     precoDe: 109.90,
-    preco: 79.90,
+    preco: 69.90,
     imagem: "img/garrafa-cafe-500ml-preta.jpg",
     imagens: ["img/garrafa-cafe-500ml-preta.jpg", "img/garrafa-cafe-500ml-preta-2.jpg"],
     descricao: "Garrafa térmica de café com 500ml e 2 xícaras de inox que encaixam na tampa. Cor: Preta. A garrafa mede 22 cm de altura e pesa 250 g.",
@@ -64,7 +64,7 @@ const PRODUTOS = [
     tamanho: "500ml",
     nome: "Kit Garrafa Térmica de Café 500ml + 2 Xícaras – Rosa",
     precoDe: 109.90,
-    preco: 79.90,
+    preco: 69.90,
     imagem: "img/garrafa-cafe-500ml-rosa.jpg",
     banner: "img/banner-cafe-rosa.jpg",
     imagens: ["img/garrafa-cafe-500ml-rosa.jpg", "img/garrafa-cafe-500ml-rosa-2.jpg"],
@@ -80,7 +80,7 @@ const PRODUTOS = [
     tamanho: "500ml",
     nome: "Kit Garrafa Térmica de Café 500ml + 2 Xícaras – Cinza",
     precoDe: 109.90,
-    preco: 79.90,
+    preco: 69.90,
     imagem: "img/garrafa-cafe-500ml-cinza.jpg",
     imagens: ["img/garrafa-cafe-500ml-cinza.jpg", "img/garrafa-cafe-500ml-cinza-2.jpg"],
     descricao: "Garrafa térmica de café com 500ml e 2 xícaras de inox que encaixam na tampa. Cor: Cinza. A garrafa mede 22 cm de altura e pesa 250 g.",
@@ -95,7 +95,7 @@ const PRODUTOS = [
     tamanho: "1,2L",
     nome: "Garrafa Térmica com Alça 1,2L – Lilás",
     precoDe: 179.90,
-    preco: 129.90,
+    preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-lilas.jpg",
     imagens: ["img/garrafa-alca-1200ml-lilas.jpg", "img/garrafa-alca-1200ml-lilas-2.jpg", "img/garrafa-alca-1200ml-lilas-3.jpg"],
     descricao: "Garrafa térmica de 1,2L com alça para carregar. Cor: Lilás. Mede 26 cm de altura e pesa 550 g.",
@@ -110,7 +110,7 @@ const PRODUTOS = [
     tamanho: "1,2L",
     nome: "Garrafa Térmica com Alça 1,2L – Preta",
     precoDe: 179.90,
-    preco: 129.90,
+    preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-preta.jpg",
     imagens: ["img/garrafa-alca-1200ml-preta.jpg", "img/garrafa-alca-1200ml-preta-2.jpg", "img/garrafa-alca-1200ml-preta-3.jpg"],
     descricao: "Garrafa térmica de 1,2L com alça para carregar. Cor: Preta. Mede 26 cm de altura e pesa 550 g.",
@@ -125,7 +125,7 @@ const PRODUTOS = [
     tamanho: "1,2L",
     nome: "Garrafa Térmica com Alça 1,2L – Azul claro",
     precoDe: 179.90,
-    preco: 129.90,
+    preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-azul-claro.jpg",
     banner: "img/banner-1200-azul-claro.jpg",
     imagens: ["img/garrafa-alca-1200ml-azul-claro.jpg", "img/garrafa-alca-1200ml-azul-claro-2.jpg", "img/garrafa-alca-1200ml-azul-claro-3.jpg"],
@@ -141,7 +141,7 @@ const PRODUTOS = [
     tamanho: "1,2L",
     nome: "Garrafa Térmica com Alça 1,2L – Bege",
     precoDe: 179.90,
-    preco: 129.90,
+    preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-bege.jpg",
     imagens: ["img/garrafa-alca-1200ml-bege.jpg", "img/garrafa-alca-1200ml-bege-2.jpg", "img/garrafa-alca-1200ml-bege-3.jpg"],
     descricao: "Garrafa térmica de 1,2L com alça para carregar. Cor: Bege. Mede 26 cm de altura e pesa 550 g.",
@@ -156,7 +156,7 @@ const PRODUTOS = [
     tamanho: "1,2L",
     nome: "Garrafa Térmica com Alça 1,2L – Rosa",
     precoDe: 179.90,
-    preco: 129.90,
+    preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-rosa.jpg",
     imagens: ["img/garrafa-alca-1200ml-rosa.jpg", "img/garrafa-alca-1200ml-rosa-2.jpg", "img/garrafa-alca-1200ml-rosa-3.jpg"],
     descricao: "Garrafa térmica de 1,2L com alça para carregar. Cor: Rosa. Mede 26 cm de altura e pesa 550 g.",
@@ -171,7 +171,7 @@ const PRODUTOS = [
     tamanho: "400ml",
     nome: "Copo Porta Long Neck 400ml (2 tampas) – Vermelho",
     precoDe: 99.90,
-    preco: 79.90,
+    preco: 59.99,
     imagem: "img/copo-long-neck-400ml-vermelho.jpg",
     banner: "img/banner-copo.jpg",
     imagens: ["img/copo-long-neck-400ml-vermelho.jpg", "img/copo-long-neck-400ml-vermelho-2.jpg", "img/copo-long-neck-400ml-vermelho-3.jpg"],
@@ -187,7 +187,7 @@ const PRODUTOS = [
     tamanho: "400ml",
     nome: "Copo Porta Long Neck 400ml (2 tampas) – Laranja",
     precoDe: 99.90,
-    preco: 79.90,
+    preco: 59.99,
     imagem: "img/copo-long-neck-400ml-laranja.jpg",
     imagens: ["img/copo-long-neck-400ml-laranja.jpg", "img/copo-long-neck-400ml-laranja-2.jpg", "img/copo-long-neck-400ml-laranja-3.jpg"],
     descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Laranja. Mede 14 cm de altura e pesa 200 g.",
@@ -202,7 +202,7 @@ const PRODUTOS = [
     tamanho: "400ml",
     nome: "Copo Porta Long Neck 400ml (2 tampas) – Azul royal",
     precoDe: 99.90,
-    preco: 79.90,
+    preco: 59.99,
     imagem: "img/copo-long-neck-400ml-azul-royal.jpg",
     imagens: ["img/copo-long-neck-400ml-azul-royal.jpg", "img/copo-long-neck-400ml-azul-royal-2.jpg", "img/copo-long-neck-400ml-azul-royal-3.jpg"],
     descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Azul royal. Mede 14 cm de altura e pesa 200 g.",
@@ -217,7 +217,7 @@ const PRODUTOS = [
     tamanho: "400ml",
     nome: "Copo Porta Long Neck 400ml (2 tampas) – Preta",
     precoDe: 99.90,
-    preco: 79.90,
+    preco: 59.99,
     imagem: "img/copo-long-neck-400ml-preta-3.jpg",
     imagens: ["img/copo-long-neck-400ml-preta-3.jpg", "img/copo-long-neck-400ml-preta.jpg", "img/copo-long-neck-400ml-preta-2.jpg", "img/copo-long-neck-400ml-preta-4.jpg"],
     descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Preta. Mede 14 cm de altura e pesa 200 g.",
@@ -232,7 +232,7 @@ const PRODUTOS = [
     tamanho: "750ml",
     nome: "Garrafa Térmica Inox 750ml – Branca",
     precoDe: 129.90,
-    preco: 99.90,
+    preco: 74.90,
     imagem: "img/garrafa-inox-750ml-branca.jpg",
     banner: "img/banner-inox.jpg",
     descricao: "Garrafa térmica de inox com 750ml. Cor: Branca. Mede 26 cm de altura e pesa 300 g.",
@@ -247,7 +247,7 @@ const PRODUTOS = [
     tamanho: "750ml",
     nome: "Garrafa Térmica Inox 750ml – Preta",
     precoDe: 129.90,
-    preco: 99.90,
+    preco: 74.90,
     imagem: "img/garrafa-inox-750ml-preta.jpg",
     imagens: ["img/garrafa-inox-750ml-preta.jpg", "img/garrafa-inox-750ml-preta-2.jpg"],
     descricao: "Garrafa térmica de inox com 750ml. Cor: Preta. Mede 26 cm de altura e pesa 300 g.",
@@ -262,7 +262,7 @@ const PRODUTOS = [
     tamanho: "750ml",
     nome: "Garrafa Térmica Inox 750ml – Prata",
     precoDe: 129.90,
-    preco: 99.90,
+    preco: 74.90,
     imagem: "img/garrafa-inox-750ml-prata.jpg",
     imagens: ["img/garrafa-inox-750ml-prata.jpg", "img/garrafa-inox-750ml-prata-2.jpg"],
     descricao: "Garrafa térmica de inox com 750ml. Cor: Prata. Mede 26 cm de altura e pesa 300 g.",
@@ -277,7 +277,7 @@ const PRODUTOS = [
     tamanho: "800ml",
     nome: "Garrafa Térmica de Água Inox 800ml – Branca",
     precoDe: 139.90,
-    preco: 109.90,
+    preco: 79.90,
     imagem: "img/garrafa-inox-800ml-branca.jpg",
     imagens: ["img/garrafa-inox-800ml-branca.jpg", "img/garrafa-inox-800ml-branca-2.jpg", "img/garrafa-inox-800ml-branca-3.jpg"],
     descricao: "Garrafa térmica de água em inox com 800ml e tampa com alça. Cor: Branca. Mede 26 cm de altura e pesa 300 g.",
@@ -292,7 +292,7 @@ const PRODUTOS = [
     tamanho: "800ml",
     nome: "Garrafa Térmica de Água Inox 800ml – Vermelha",
     precoDe: 139.90,
-    preco: 109.90,
+    preco: 79.90,
     imagem: "img/garrafa-inox-800ml-vermelha.jpg",
     imagens: ["img/garrafa-inox-800ml-vermelha.jpg", "img/garrafa-inox-800ml-vermelha-2.jpg", "img/garrafa-inox-800ml-vermelha-3.jpg"],
     descricao: "Garrafa térmica de água em inox com 800ml e tampa com alça. Cor: Vermelha. Mede 26 cm de altura e pesa 300 g.",
@@ -307,7 +307,7 @@ const PRODUTOS = [
     tamanho: "800ml",
     nome: "Garrafa Térmica de Água Inox 800ml – Azul marinho",
     precoDe: 139.90,
-    preco: 109.90,
+    preco: 79.90,
     imagem: "img/garrafa-inox-800ml-azul-marinho.jpg",
     imagens: ["img/garrafa-inox-800ml-azul-marinho.jpg", "img/garrafa-inox-800ml-azul-marinho-2.jpg"],
     descricao: "Garrafa térmica de água em inox com 800ml e tampa com alça. Cor: Azul marinho. Mede 26 cm de altura e pesa 300 g.",
@@ -322,7 +322,7 @@ const PRODUTOS = [
     tamanho: "800ml",
     nome: "Garrafa Térmica de Água Inox 800ml – Preta",
     precoDe: 139.90,
-    preco: 109.90,
+    preco: 79.90,
     imagem: "img/garrafa-inox-800ml-preta.jpg",
     imagens: ["img/garrafa-inox-800ml-preta.jpg", "img/garrafa-inox-800ml-preta-2.jpg", "img/garrafa-inox-800ml-preta-3.jpg"],
     descricao: "Garrafa térmica de água em inox com 800ml e tampa com alça. Cor: Preta. Mede 26 cm de altura e pesa 300 g.",
@@ -337,7 +337,7 @@ const PRODUTOS = [
     tamanho: "800ml",
     nome: "Garrafa Térmica de Água Inox 800ml – Prata",
     precoDe: 139.90,
-    preco: 109.90,
+    preco: 79.90,
     imagem: "img/garrafa-inox-800ml-prata.jpg",
     imagens: ["img/garrafa-inox-800ml-prata.jpg", "img/garrafa-inox-800ml-prata-2.jpg", "img/garrafa-inox-800ml-prata-3.jpg"],
     descricao: "Garrafa térmica de água em inox com 800ml e tampa com alça. Cor: Prata. Mede 26 cm de altura e pesa 300 g.",
@@ -352,7 +352,7 @@ const PRODUTOS = [
     tamanho: "800ml",
     nome: "Garrafa Térmica de Água Inox 800ml – Rosa claro",
     precoDe: 139.90,
-    preco: 109.90,
+    preco: 79.90,
     imagem: "img/garrafa-inox-800ml-rosa-claro.jpg",
     imagens: ["img/garrafa-inox-800ml-rosa-claro.jpg", "img/garrafa-inox-800ml-rosa-claro-2.jpg", "img/garrafa-inox-800ml-rosa-claro-3.jpg"],
     descricao: "Garrafa térmica de água em inox com 800ml e tampa com alça. Cor: Rosa claro. Mede 26 cm de altura e pesa 300 g.",
@@ -360,6 +360,37 @@ const PRODUTOS = [
     estoque: 5
   }
 ];
+
+/**
+ * PROMOÇÃO BLACK NOVEMBER (preço "de" riscado só durante a promoção)
+ * -------------------------------------------------------------------
+ * Em cada produto, "precoDe" é o PREÇO NORMAL da loja e "preco" é o preço
+ * da promoção. Enquanto a promoção vale, o site mostra o normal riscado e o
+ * preço promocional. Depois de PROMOCAO_ATE, o site passa sozinho a vender
+ * pelo preço normal, sem riscado e sem etiqueta de desconto (o checkout
+ * também cobra o preço normal). Não precisa subir arquivo no dia.
+ */
+const PROMOCAO_ATE = "2026-11-30T23:59:59-03:00";
+
+function promocaoAtiva(agora) {
+  const momento = typeof agora === "number" ? agora : Date.now();
+  return momento <= Date.parse(PROMOCAO_ATE);
+}
+
+/** Gravação a laser: preço da promoção Black November e preço normal. */
+const GRAVACAO = { promo: 10, normal: 15 };
+
+function precoGravacao(agora) {
+  return promocaoAtiva(agora) ? GRAVACAO.promo : GRAVACAO.normal;
+}
+
+PRODUTOS.forEach((p) => {
+  if (!p.precoDe) return;
+  const normal = p.precoDe;
+  const promo = p.preco;
+  Object.defineProperty(p, "preco", { enumerable: true, configurable: true, get() { return promocaoAtiva() ? promo : normal; } });
+  Object.defineProperty(p, "precoDe", { enumerable: true, configurable: true, get() { return promocaoAtiva() ? normal : undefined; } });
+});
 
 /**
  * FRETE POR REGIÃO E PESO
@@ -536,9 +567,9 @@ function calcularFretePedido(itens, subtotal, cep, cidade) {
  *   percentual -> % de desconto (ex: 10 = 10%)
  *   validoAte  -> data e hora final, no horário de Brasília (-03:00)
  */
-const CUPONS = {
-  BLACK10: { percentual: 10, validoAte: "2026-11-30T23:59:59-03:00" }
-};
+// Nenhum cupom ativo no momento. Para criar um, adicione uma linha, por exemplo:
+//   VOLTA10: { percentual: 10, validoAte: "2026-12-31T23:59:59-03:00" }
+const CUPONS = {};
 
 /**
  * CAMPANHA (banners de Black Friday)
@@ -548,7 +579,6 @@ const CUPONS = {
  */
 const CAMPANHA = {
   ativa: true,
-  cupom: "BLACK10",
   nome: "Black November",
   fim: "30/11"
 };
@@ -573,5 +603,5 @@ function precoComCupom(preco, cupom) {
 // Permite que as funções em /api usem esta mesma lista (preços confiáveis).
 // No navegador, "module" não existe e esta linha é ignorada.
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { PRODUTOS, FRETE_GRATIS_ACIMA, ufDoCep, pesoDoPedido, calcularFretePedido, ehFreteLocal, normalizarCidade, CUPONS, buscarCupom, precoComCupom };
+  module.exports = { PRODUTOS, PROMOCAO_ATE, promocaoAtiva, GRAVACAO, precoGravacao, FRETE_GRATIS_ACIMA, ufDoCep, pesoDoPedido, calcularFretePedido, ehFreteLocal, normalizarCidade, CUPONS, buscarCupom, precoComCupom };
 }
