@@ -36,7 +36,7 @@ const PRODUTOS = [
     precoDe: 109.90,
     preco: 69.90,
     imagem: "img/garrafa-cafe-500ml-verde.jpg",
-    imagens: ["img/garrafa-cafe-500ml-verde.jpg", "img/garrafa-cafe-500ml-verde-2.jpg", "img/garrafa-cafe-500ml-verde-3.jpg"],
+    imagens: ["img/garrafa-cafe-500ml-verde.jpg", "img/garrafa-cafe-500ml-verde-2.jpg"],
     descricao: "Garrafa térmica de café com 500ml e 2 xícaras de inox que encaixam na tampa. Cor: Verde. A garrafa mede 22 cm de altura e pesa 250 g.",
     pesoEnvio: 500,
     estoque: 5
@@ -82,7 +82,7 @@ const PRODUTOS = [
     precoDe: 109.90,
     preco: 69.90,
     imagem: "img/garrafa-cafe-500ml-cinza.jpg",
-    imagens: ["img/garrafa-cafe-500ml-cinza.jpg", "img/garrafa-cafe-500ml-cinza-2.jpg"],
+    imagens: ["img/garrafa-cafe-500ml-cinza.jpg"],
     descricao: "Garrafa térmica de café com 500ml e 2 xícaras de inox que encaixam na tampa. Cor: Cinza. A garrafa mede 22 cm de altura e pesa 250 g.",
     pesoEnvio: 500,
     estoque: 5
@@ -112,7 +112,7 @@ const PRODUTOS = [
     precoDe: 179.90,
     preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-preta.jpg",
-    imagens: ["img/garrafa-alca-1200ml-preta.jpg", "img/garrafa-alca-1200ml-preta-2.jpg", "img/garrafa-alca-1200ml-preta-3.jpg"],
+    imagens: ["img/garrafa-alca-1200ml-preta.jpg", "img/garrafa-alca-1200ml-preta-2.jpg"],
     descricao: "Garrafa térmica de 1,2L com alça para carregar. Cor: Preta. Mede 26 cm de altura e pesa 550 g.",
     pesoEnvio: 800,
     estoque: 5
@@ -158,7 +158,7 @@ const PRODUTOS = [
     precoDe: 179.90,
     preco: 89.90,
     imagem: "img/garrafa-alca-1200ml-rosa.jpg",
-    imagens: ["img/garrafa-alca-1200ml-rosa.jpg", "img/garrafa-alca-1200ml-rosa-2.jpg", "img/garrafa-alca-1200ml-rosa-3.jpg"],
+    imagens: ["img/garrafa-alca-1200ml-rosa.jpg", "img/garrafa-alca-1200ml-rosa-2.jpg"],
     descricao: "Garrafa térmica de 1,2L com alça para carregar. Cor: Rosa. Mede 26 cm de altura e pesa 550 g.",
     pesoEnvio: 800,
     estoque: 5
@@ -218,8 +218,8 @@ const PRODUTOS = [
     nome: "Copo Porta Long Neck 400ml (2 tampas) – Preta",
     precoDe: 99.90,
     preco: 59.99,
-    imagem: "img/copo-long-neck-400ml-preta-3.jpg",
-    imagens: ["img/copo-long-neck-400ml-preta-3.jpg", "img/copo-long-neck-400ml-preta.jpg", "img/copo-long-neck-400ml-preta-2.jpg", "img/copo-long-neck-400ml-preta-4.jpg"],
+    imagem: "img/copo-long-neck-400ml-preta.jpg",
+    imagens: ["img/copo-long-neck-400ml-preta.jpg", "img/copo-long-neck-400ml-preta-2.jpg"],
     descricao: "Copo térmico de 400ml com dois tipos de tampa. Cor: Preta. Mede 14 cm de altura e pesa 200 g.",
     pesoEnvio: 450,
     estoque: 5
@@ -234,6 +234,7 @@ const PRODUTOS = [
     precoDe: 129.90,
     preco: 74.90,
     imagem: "img/garrafa-inox-750ml-branca.jpg",
+    imagens: ["img/garrafa-inox-750ml-branca.jpg", "img/garrafa-inox-750ml-branca-2.jpg"],
     banner: "img/banner-inox.jpg",
     descricao: "Garrafa térmica de inox com 750ml. Cor: Branca. Mede 26 cm de altura e pesa 300 g.",
     pesoEnvio: 550,
